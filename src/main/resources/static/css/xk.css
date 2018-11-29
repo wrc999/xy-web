@@ -1,0 +1,116 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	margin-left: 5%;
+	margin-right: 5%;
+}
+a:hover{color: rgb(93,169,249);text-decoration: none;}
+a{
+	text-decoration: none;
+	font-family: "PingFang SC","Hiragino Sans GB","Microsoft Yahei";	
+	font-size: 18px;
+	color: black;
+}
+h3{
+	color: rgb(93,169,249);
+}
+.register:hover{
+	background-color: rgb(93,169,249);
+}
+.register a:hover{
+	color: black;
+}
+.top{
+	width: 100%;
+	height: 100px;
+}
+.top_logo{
+	width: 20%;
+	height: 100px;
+	float: left;
+}
+.top_menu{
+	width: 50%;
+	height: 100px;
+	float: left;
+	text-align: center;
+}
+.top_login{
+	width: 30%;
+	height: 100px;
+	float: left;
+}
+.xk{
+	border-bottom: 2px solid rgb(93,169,249);
+}
+.xk a{
+	color: rgb(93,169,249);
+}
+.ul{
+	position: relative;
+	left: 150px;
+}
+.ul li{
+	display: list-item;
+	list-style: none;
+	float: left;
+	line-height: 25px;
+	position: relative;
+	top: 36px;
+	left: 20px;
+	position: relative;
+	padding: 0 20px 15px;
+}
+.login_word{
+	font-size: 14px;
+	position: relative;
+	top: 70px;
+	left: 100px;
+	color: red;
+	width: 270px;
+}
+.register{
+	width: 70px;
+	height: 40px;
+	color: black;
+	border: 2px solid rgb(93,169,249);
+	border-radius:10px; 
+	position: relative;
+	bottom: 30px;
+	float: left;
+}
+.register_word{
+	position: relative;
+	top: 20%;
+	left: 20%;
+}
+.login{
+	position: relative;
+	left: 100px;
+}
+span:hover{
+	color:rgb(93,169,249);
+	cursor:pointer;
+}
+.buttom{
+	font-size: 14px;
+}
+#headDiv{
+  font-size: 40px;
+  text-align: center;
+  font-family: "PingFang SC","Hiragino Sans GB","Microsoft Yahei";
+  color:rgb(93,169,249);
+}
+
+#mainDiv img{
+  width: 290px;
+  height: 250px;
+}
+
+#mainDiv img:hover{
+		position: relative;
+			transform: scale(1.1);
+			transition: all 2s;
+}

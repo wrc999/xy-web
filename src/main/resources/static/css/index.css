@@ -1,0 +1,195 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	margin-left: 5%;
+	margin-right: 5%;
+}
+a:hover{color: rgb(93,169,249);text-decoration: none;}
+a{
+	text-decoration: none;
+	font-family: "PingFang SC","Hiragino Sans GB","Microsoft Yahei";	
+	font-size: 18px;
+	color: black;
+}
+h3{
+	color: rgb(93,169,249);
+}
+.register:hover{
+	background-color: rgb(93,169,249);
+}
+.register a:hover{
+	color: black;
+}
+.top{
+	width: 100%;
+	height: 120px;
+}
+.top_logo{
+	width: 30%;
+	height: 120px;
+	float: left;
+}
+.top_menu{
+	width: 40%;
+	height: 120px;
+	float: left;
+	text-align: center;
+}
+.top_login{
+	width: 30%;
+	height: 120px;
+	float: left;
+}
+.xy_ssh{
+	border-bottom: 2px solid rgb(93,169,249);
+}
+.xy_ssh a{
+	color: rgb(93,169,249);
+}
+.ul li{
+	list-style: none;
+	float: left;
+	line-height: 25px;
+	position: relative;
+	top: 36px;
+	left: 40px;
+	padding: 0 20px 15px;
+}
+.login_word{
+	font-size: 14px;
+	position: relative;
+	top: 70px;
+	left: 90px;
+	color: red;
+	width: 270px;
+}
+.register{
+	width: 70px;
+	height: 40px;
+	color: black;
+	border: 2px solid rgb(93,169,249);
+	border-radius:10px; 
+	position: relative;
+	bottom: 30px;
+	float: left;
+}
+.register_word{
+	position: relative;
+	top: 20%;
+	left: 20%;
+}
+.login{
+	position: relative;
+	left: 100px;
+}
+span:hover{
+	color:rgb(93,169,249);
+	cursor:pointer;
+}
+.buttom{
+	font-size: 14px;
+}
+.middle1{height: 610px;}
+.middle2{height: 500px;}
+.mid_xl{width: 25%;height:30%;float: left;}
+.mid_xk{width: 25%;height:20%;float: left;}
+.mid_xx{width: 25%;height:30%;float: left;}
+.mid_yj{width: 25%;height:30%;float:left;}
+.img_xl{position: relative;left: 60px;top: 50px;}
+.img_xk{position: relative;left: 60px;top: 50px;}
+.img_xx{position: relative;left: 60px;top: 50px;}
+.img_yj{position: relative;left: 60px;top: 50px;}
+.mid_p1{position: relative;left: 130px;top: 100px;width: 300px;}
+.mid_p2{position: relative;left: 80px;top: 110px;width: 300px;}
+.mid_p3{position: relative;left: 80px;top: 120px;width: 300px;}
+.mid_p4{position: relative;left: 130px;top: 100px;width: 200px;}
+.mid_p5{position: relative;left: 80px;top: 110px;width: 200px;}
+.mid_p6{position: relative;left: 80px;top: 120px;width: 200px;}
+.dg-container{
+	width: 100%;
+	height: 450px;
+	position: relative;
+}
+.dg-wrapper{
+	width: 481px;
+	height: 316px;
+	margin: 0 auto;
+	position: relative;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-perspective: 1000px;
+	-moz-perspective: 1000px;
+	-o-perspective: 1000px;
+	-ms-perspective: 1000px;
+	perspective: 1000px;
+}
+.dg-wrapper a{
+	width: 500px;
+	height: 400px;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: transparent url(../images/browser.png) no-repeat top left;
+	box-shadow: 0px 10px 20px rgba(0,0,0,0.3);
+}
+.dg-wrapper span{
+	color: rgb(93,169,249);
+}
+.dg-wrapper a.dg-transition{
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.dg-wrapper a img{
+	display: block;
+	padding: 41px 0px 0px 0px;
+}
+.dg-wrapper a div{
+	font-style: italic;
+	text-align: center;
+	line-height: 50px;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+	color: #333;
+	font-size: 16px;
+	width: 100%;
+	bottom: -55px;
+	display: none;
+	position: absolute;
+	left:0;
+}
+.dg-wrapper a.dg-center div{
+	display: block;
+}
+.dg-container nav{
+	width: 58px;
+	position: absolute;
+	z-index: 1000;
+	bottom: 40px;
+	left: 50%;
+	margin-left: -29px;
+}
+.dg-container nav span{
+	text-indent: -9000px;
+	float: left;
+	cursor:pointer;
+	width: 24px;
+	height: 25px;
+	opacity: 0.8;
+	background: transparent url(../images/arrows.png) no-repeat top left;
+}
+.dg-container nav span:hover{
+	opacity: 1;
+}
+.dg-container nav span.dg-next{
+	background-position: top right;
+	margin-left: 10px;
+}
+.dg-center {transform: translateX(0px) translateZ(0px) rotateY(0deg);}

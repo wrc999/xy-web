@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>享悦</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="layui/css/layui.css">
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<link rel="shortcut icon" href="images/ico.ico">
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			box-sizing: border-box;   /*  css3 盒子模型 */
+		}
+		body{-webkit-font-smoothing:antialiased;background-color:#fff;font:12px/1.5 Microsoft YaHei,tahoma,arial,Hiragino Sans GB,\\5b8b\4f53,sans-serif;}
+		em,i{font-style: normal;}
+		li{list-style: none;}
+		img{border: 0;vertical-align: middle;}
+		button{cursor: pointer;}
+		a{color:black;text-decoration: none;}
+		a:hover{color: rgb(5,169,249);}
+		button,input{font-family: Microsoft YaHei,tahoma,arial,Hiragino Sans GB,\\5b8b\4f53,sans-serif;}
+		header{
+			width: 1300px;
+			height: 100px;
+			margin: 0 auto;
+			padding-top: 30px;
+		}
+		.logo{
+			width: 195px;
+			height: 42px;
+			float: left;
+		}
+		.logo a{
+			display: block;
+			width: 195px;
+			height: 42px;
+			background: url(images/logo1.png) no-repeat;
+			text-indent: -200px;/* 向左缩进*/
+			overflow: hidden;
+		}
+		nav{float: left;margin-left: 20px;}
+		nav li{float: left;height: 40px;line-height: 40px;margin-left: 25px;}
+		nav li a{display: block;height: 40px;font-size: 18px;padding: 0 10px;}
+		nav li a:hover{border-bottom: 2px solid;color: rgb(5,169,249);}
+		nav li:nth-child(1) a{border-bottom: 2px solid;color: rgb(5,169,249);}
+		.search{width: 410px;height: 40px;background-color: purple;float: left;margin-left: 20px;}
+		.search input{width: 361px;height: 40px;border: 1px solid #00a4ff;outline: none;padding-left: 10px;float: left;}
+		.search button{width: 49px;height: 40px;border: 0;outline: none;float: left;background: url(images/fa-search.png) no-repeat;}
+		.personal{float: right;height: 40px;line-height: 40px;}
+		.personal span {margin-right: 10px;font-size: 15px;}
+		.personal span img{border-radius: 50%;transition: all 0.6s;}
+		.personal span img:hover{transform: rotate(-360deg);}
+		.select{display: none;position: absolute;z-index: 2;background-color: rgba(255,255,255,0.4);width: 120px;text-align: center;}
+		 header .personal:hover{color: rgb(5,169,249);}
+		/* 控制同级的需要加+号 */
+		 header .personal:hover .select{display: block;}
+		.select:hover{display: block;}
+		 #carousel{margin: 0 auto;width:100%;height: 600px; }
+		 #carousel img{width: 100%;height: 600px;}
+		.intro1{text-align: center;margin-top: 20px;margin-bottom: 20px;}
+		.intro2{margin: 0 auto;width:1300px;height: 300px;}
+		.page{width: 325px;height: 300px;float: left;}
+		.center{text-align: center;position: relative;top: 70px;}
+		.talkPic{background: url(images/1.png) 0% 0% / contain;width: 110px;height: 115px;display: block;margin: 0 auto;transition: all  2s;}
+		.schoolPic{background: url(images/2.png) 0% 0% / contain;width: 110px;height: 115px;display: block;margin: 0 auto;transition: all 2s;}
+		.activityPic{background: url(images/3.png) 0% 0% / contain;width: 110px;height: 115px;display: block;margin: 0 auto;transition: all 2s;}
+		.infoPic{background: url(images/4.png) 0% 0% / contain;width: 110px;height: 115px;display: block;margin: 0 auto;transition: all 2s;}
+		.detail{display: none;}
+		.upload{background: url("images/upload.png");width: 140px;height: 150px;position: fixed;top: 20%;right: 2%;}
+		.close{display: none;}
+		.upload:hover{transform: rotateY(180deg);transition: transform  1s;cursor: pointer;}
+		.upload:hover .close{display: block;}
+	</style>
+</head
+<body>
+	<!-- header开始 -->
+	<header>
+		<!-- 1.logo -->
+	<div class="logo">
+		<h1><a href="#" title="享悦">享悦</a></h1>
+	</div>
+		<!-- 菜单 -->
+	<nav>
+		<ul>
+			<li><a href="#">首页</a></li>
+			<li><a href="#">享聊</a></li>
+			<li><a href="#">享看</a></li>
+			<li><a href="#">活动</a></li>
+			<li><a href="#">悦己</a></li>
+			<li><a href="#">app下载</a></li>
+		</ul>
+	</nav>
+		<!--搜索框-->
+	<div class="search">
+		<input type="search" placeholder="请输入关键字" name="">
+		<button></button>
+	</div>
+		<!--个人中心-->
+	<div class="personal">
+		<span class="info">
+			<img src="images/pic.png" height="40px" width="40px">
+			刘德华
+		</span>
+		<dl class="select">
+			<dd><a href="">基本资料</a></dd>
+	        <dd><a href="">安全设置</a></dd>
+	        <dd><a href="">退出</a></dd>
+		</dl>
+	</div>
+	</header>
+	
+	<!-- 1.轮播图 -->
+	<div class="layui-carousel" id="carousel">
+	  <div carousel-item="">
+	    <div><img src="images/middle1.jpg"></div>
+	    <div><img src="images/middle2.jpg"></div>
+	    <div><img src="images/middle3.jpg"></div>
+	    <div><img src="images/middle4.jpg"></div>
+	  </div>
+	</div>
+	
+	<!-- 2.简介 -->
+	<div class="intro1">
+		<h1>享你所想，悦你所悦</h1>
+	</div>
+
+	<!-- 四个小页面 -->
+	<div class="intro2">
+				<div class="page page1">
+					<div class="center talk">
+						<p class="talkPic"></p>
+						<h1 class="title1">心情分享</h1>
+						<p class="detail a">随时随地发布心情分享<br/>当然不止是心情</p>
+					</div>	
+				</div>
+				<div class="page page2">
+					<div class="center pic">
+						<p class="schoolPic"></p>
+						<h1 class="title2">校园景色</h1>
+						<p class="detail b">足不出户，查看全国高校美景<br/>更多实用功能等你去发现</p>
+					</div>
+				</div>
+				<div class="page page3">
+					<div class="center activity">
+						<p class="activityPic"></p>
+						<h1 class="title3">校园动态</h1>
+						<p class="detail c">新鲜事、社团活动、跳蚤市场<br/>校园热门资讯一手掌握</p>
+					</div>
+				</div>
+				<div class="page page4">
+					<div class="center info">
+						<p class="infoPic"></p>
+						<h1 class="title4">个人中心</h1>
+						<p class="detail d">随心展示你的个人相关信息<br/>你的空间你做主</p>
+					</div>
+				</div>
+		</div>
+		<footer style="height:60px;">
+				<p style="line-height: 40px;text-align: center;font-size: 18px;">Copyright &copy; 2015-2019 享悦 版权所有</p>
+				<p style="line-height: 20px;text-align: center;font-size: 12px;">访问统计：您是第<span id="visitNum"></span>位访问用户（自2018-8-1起）</p>
+		</footer>
+		<div class="upload">
+			<img src="images/close.png" class="close">
+		</div>
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script type="text/javascript">
+		layui.use(['carousel','jquery','layer'], function(){
+			var $ = layui.jquery;
+			var layer = layui.layer;
+			var carousel = layui.carousel
+			$(".close").click(function(){
+				$(".upload").css("display","none");
+			});
+			$(".upload").click(function(){
+				layer.msg("功能暂未完成，请等待")
+			});
+			  //图片轮播
+			  carousel.render({
+			    elem: '#carousel'
+			    ,width: '1300px'
+			    ,height: '600px'
+			    ,anim: 'fade'
+			    ,interval: 4000
+			  });
+			  $(".page1").hover(function(){
+			  		/*添加背景颜色*/
+			  		$(".page1").css("background-color","rgba(5,169,249,0.3)");
+			  		/*使简介弹出*/
+			  		$(".a").css("display","block");
+			  		/*改变字体颜色*/
+			  		$('.talk').css("color","rgb(5,169,249)");
+			  		/*必须要加上0% 0% / contaion，contaion不能单独加进去，否则背景图片也会失效*/
+			  		/*更改图片，并添加变换效果*/
+			  		$('.talkPic').css({"background":"url(images/1_1.png) 0% 0% / contain","transform":"rotate(-360deg)"});
+			  },function(){
+			  		$(".page1").css("background-color","initial");
+			  		$(".a").css("display","none");
+			  		$('.talk').css("color",'initial');
+			  		$('.talkPic').css({"background":"url(images/1.png) 0% 0% / contain","transform":"initial"});
+			  });
+			  $(".page2").hover(function(){
+			  		$(".page2").css("background-color","rgba(5,169,249,0.3)");
+			  		$(".b").css("display","block");
+			  		$('.pic').css("color","rgb(5,169,249)");
+			  		$('.schoolPic').css({"background":"url(images/2_2.png) 0% 0% / contain","transform":"rotate(-360deg)"});
+			  },function(){
+			  		$(".page2").css("background-color","initial");
+			  		$(".b").css("display","none");
+			  		$('.pic').css("color",'initial');
+			  		$('.schoolPic').css({"background":"url(images/2.png) 0% 0% / contain","transform":"initial"});
+			  });
+			  $(".page3").hover(function(){
+			  		$(".page3").css("background-color","rgba(5,169,249,0.3)");
+			  		$(".c").css("display","block");
+			  		$('.activity').css("color","rgb(5,169,249)");
+			  		$('.activityPic').css({"background":"url(images/3_3.png) 0% 0% / contain","transform":"rotate(-360deg)"});
+			  },function(){
+			  		$(".page3").css("background-color","initial");
+			  		$(".c").css("display","none");
+			  		$('.activity').css("color",'initial');
+			  		$('.activityPic').css({"background":"url(images/3.png) 0% 0% / contain","transform":"initial"});
+			  });
+			  $(".page4").hover(function(){
+			  		$(".page4").css("background-color","rgba(5,169,249,0.3)");
+			  		$(".d").css("display","block");
+			  		$('.info').css("color","rgb(5,169,249)");
+			  		$('.infoPic').css({"background":"url(images/4_4.png) 0% 0% / contain","transform":"rotate(-360deg)"});
+			  },function(){
+			  		$(".page4").css("background-color","initial");
+			  		$(".d").css("display","none");
+			  		$('.info').css("color",'initial');
+			  		$('.infoPic').css({"background":"url(images/4.png) 0% 0% / contain","transform":"initial"});
+			  });
+			  // HTML5本地存储，计算网站访问量
+			  if (localStorage.pagecount) {
+				  	localStorage.pagecount = Number(localStorage.pagecount)+1;
+				  }else{
+				  	localStorage.pagecount=1
+				  }
+				  $("#visitNum").text(localStorage.pagecount);
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wrc.xy.dao.adminDao">
+	<!-- 添加 -->
+	<insert id="adminLogAdd" parameterType="adminLog">
+		insert into adminlog(account,details,createTime) 
+		values(#{account},#{details},#{createTime})
+	</insert>
+	<select id="adminLogSelect" resultType="adminLog">
+		select * from adminlog
+	</select>
+	<select id="login" parameterType="userinfo" resultType="String">
+		select account from admin where account=#{account} and passWord=#{passWord}
+	</select>
+</mapper>

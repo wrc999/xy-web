@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>享悦管理</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="Shortcut Icon" href="../images/xy.ico">
+  <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+<style>
+ 	img{
+ 		width: 28%;
+ 		height: 90%;
+ 	}
+ 	#toolbar{
+ 	padding: 1%;}
+ 	#club,#activity,#people,#examineClub,#examineActivity{
+		width:200px;
+		height:100px;
+		float:left;
+		margin:0 20px 0 0;
+	}
+	#club_img,#activity_img,#people_img,#examineClub_img,#examineActivity_img{
+		float:left;
+		width:64px;
+		height:64px;
+		margin-top:10%;
+		padding-right:10px;
+		padding-left:10px;
+	}
+	#club_name,#activity_name,#people_name,#examineClub_name,#examineActivity_name{
+		font-size:120%;
+		margin-top:7%;
+	}
+	#club_num,#activity_num,#people_num,#examineClub_num,#examineActivity_num{
+		font-size:150%;
+	}
+</style>
+</head>
+<body>
+	<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo"><img src="../images/logo.png">享悦</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;"><img src="http://p9sertmb8.bkt.clouddn.com/userHeadPic/20180628145059" class="layui-nav-img">贤心 </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">基本资料</a></dd>
+          <dd><a href="">安全设置</a></dd>
+          <dd><a href="" class="user" data-type="quit">退了</a></dd>
+        </dl>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a class="" href="javascript:;">信息管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;" class="user" data-type="user">用户信息管理</a></dd>
+            <dd><a href="javascript:;" class="user" data-type="talk">分享管理</a></dd>
+            <dd><a href="javascript:;" class="user" data-type="pic">图片管理</a></dd>
+            <dd><a href="javascript:;" class="user" data-type="activity">活动管理</a></dd>
+            <dd><a href="javascript:;" class="user" data-type="topic">话题管理</a></dd>
+            <dd><a href="javascript:;" class="user" data-type="club">社团管理</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">审核管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;" class="user" data-type="examineClub">社团审核</a></dd>
+            <dd><a href="javascript:;" class="user" data-type="examineActivity">活动审核</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item"><a href="">用户建议</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+		<div class="layui-tab layui-tab-brief" lay-filter="tab" lay-allowclose="true">
+			  <ul class="layui-tab-title">
+			    <li class="layui-this" lay-id="11">首页</li>
+			  </ul>
+			  <div class="layui-tab-content">
+			    <!-- <div class="layui-tab-item layui-show"><iframe src="home.html" style="width:100%;height:470px;border:0;" ></iframe></div> -->
+			    <div class="layui-tab-item layui-show">
+			    	<div>
+						<div style="background:	rgb(28,176,154)" id="club" class="layui-btn" data-type="indexClub">
+							<img alt="" src="../images/index_club.png" id="club_img">
+							<div id="club_name"><p>总社团</p></div>
+							<div id="club_num"><p>6</p></div>
+						</div>
+						<div style="background:	rgb(145,167,167)" id="activity" class="layui-btn" data-type="indexActivity">
+							<img alt="" src="../images/index_activity.png" id="activity_img">
+							<div id="activity_name"><p>总活动</p></div>
+							<div id="activity_num"><p>6</p></div>
+						</div>
+						<div style="background:rgb(140,243,93)" id="people" class="layui-btn" data-type="indexPeople">
+							<img alt="" src="../images/index_people.png" id="people_img">
+							<div id="people_name"><p>总用户</p></div>
+							<div id="people_num"><p>6</p></div>
+						</div>
+						<div style="background:	rgb(209,116,114)" id="examineClub" class="layui-btn" data-type="indexExamineClub">
+							<img alt="" src="../images/examineclub.png" id="examineClub_img">
+							<div id="examineClub_name"><p>带审核社团</p></div>
+							<div id="examineClub_num"><p>6</p></div>
+						</div>
+						<div style="background:	rgb(62,179,69)" id="examineActivity" class="layui-btn" data-type="indexExamineActivity">
+							<img alt="" src="../images/examineactivity.png" id="examineActivity_img">
+							<div id="examineActivity_name"><p>待审核活动</p></div>
+							<div id="examineActivity_num"><p>6</p></div>
+						</div>
+					</div>
+					<hr/>
+						<fieldset class="layui-elem-field layui-field-title">
+						  <legend>管理日志</legend>
+						</fieldset>
+					<ul class="layui-timeline" id="log"></ul>  
+			    </div>
+			  </div>
+			</div>
+  </div>
+  <div class="layui-footer" style="background-color:#EEEEEE;">
+    <!-- 底部固定区域 -->
+    <p style="text-align: center;">Copyright &copy; 2015-2019 享悦 版权所有</p>
+  </div>
+</div>
+<script src="../layui/layui.js" charset="utf-8"></script>
+<script>
+	layui.use(['layer','element'], function(){
+		//获取layui内置jquery对象
+		var $ = layui.jquery,
+		//引入弹窗
+		layer = layui.layer;
+		//左侧导航栏收缩
+		element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+		var localTest = layui.sessionData('userInfo');
+		console.log(localTest.account+"11111111111111"); //获得“贤心”
+		$.post(
+    			"/xy/admin/get",
+    	        {},
+    	        function(result){
+    	        	var nav = "";
+    	    		for (var i in result.adminLogs){
+    	    			//样式写入
+    	    			nav+="<li class=\"layui-timeline-item\">";
+    	    			nav+="<i class=\"layui-icon layui-timeline-axis\"></i>";
+    	    			nav+="<div class=\"layui-timeline-content layui-text\">";
+    	    			nav+="<h3 class=\"layui-timeline-title\">"+result.adminLogs[i].createTime.substring(0,19)+"</h3>";
+    	    			nav+="<p><span style=\"color:red;font-size:20px;\">"+result.adminLogs[i].account+"</span>"+result.adminLogs[i].details+"</p></div></li>";
+    	    		}
+    	    		$("#log").html(nav);
+    				$("#club_num").text(result.allClub);
+    				$("#activity_num").text(result.allActivity);
+    				$("#people_num").text(result.allUser);
+    				$("#examineClub_num").text(result.examineClub);
+    				$("#examineActivity_num").text(result.examineActivity);
+    	      });
+		
+		//触发事件
+		  var active = {
+		    user: function(){
+			if($(".layui-tab-title li[lay-id='user']").length==0){
+				      //新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '用户信息管理' //用于演示
+				        ,content: '<iframe src="user.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+						,id: 'user' 
+				      })
+				      element.tabChange('tab', 'user');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'user');
+				}
+		    },
+		    talk: function(){
+		    	if($(".layui-tab-title li[lay-id='talk']").length==0){
+				      //新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '分享管理' //用于演示
+				        ,content: '<iframe src="talk.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+				        ,id: "talk" 
+				      })
+				      element.tabChange('tab', 'talk');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'talk');
+					//刷新数据
+				}
+		    },
+		    pic: function(){
+		    	if($(".layui-tab-title li[lay-id='pic']").length==0){
+				      //新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '照片管理' //用于演示
+				        ,content: '<iframe src="view.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+				        ,id: "pic" 
+				      })
+				      element.tabChange('tab', 'pic');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'pic');
+					//刷新数据
+				}
+		    },
+		    activity: function(){
+		    	if($(".layui-tab-title li[lay-id='activity']").length==0){
+		    		//新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '活动管理' //用于演示
+				        ,content: '<iframe src="activity.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+				        ,id: "activity" 
+				      })
+				      element.tabChange('tab', 'activity');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'activity');
+					//刷新数据
+				}
+		    },
+		    topic: function(){
+		    	if($(".layui-tab-title li[lay-id='topic']").length==0){
+		    		//新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '话题管理' //用于演示
+				        ,content: '<iframe src="topic.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+				        ,id: "topic" 
+				      })
+				      element.tabChange('tab', 'topic');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'topic');
+					//刷新数据
+				}
+		    },
+		    club: function(){
+		    	if($(".layui-tab-title li[lay-id='club']").length==0){
+		    		//新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '社团管理' //用于演示
+				        ,content: '<iframe src="club.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+				        ,id: "club" 
+				      })
+				      element.tabChange('tab', 'club');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'club');
+					//刷新数据
+				}
+		    },
+		    examineActivity: function(){
+		    	if($(".layui-tab-title li[lay-id='examineActivity']").length==0){
+		    		//新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '活动审核' //用于演示
+				        ,content: '<iframe src="examineActivity.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+				        ,id: "examineActivity" 
+				      })
+				      element.tabChange('tab', 'examineActivity');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'examineActivity');
+					//刷新数据
+				}
+		    },
+		    examineClub: function(){
+		    	if($(".layui-tab-title li[lay-id='examineClub']").length==0){
+		    		//新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '社团审核' //用于演示
+				        ,content: '<iframe src="examineClub.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+				        ,id: "examineClub" 
+				      })
+				      element.tabChange('tab', 'examineClub');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'activity');
+					//刷新数据
+				}
+		    },
+		    indexClub: function(){
+		    	if($(".layui-tab-title li[lay-id='club']").length==0){
+		    		//新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '社团管理' //用于演示
+				        ,content: '<iframe src="club.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+				        ,id: "club" 
+				      })
+				      element.tabChange('tab', 'club');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'club');
+					//刷新数据
+				}
+	  			},
+  			indexActivity: function(){
+  				if($(".layui-tab-title li[lay-id='activity']").length==0){
+		    		//新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '活动管理' //用于演示
+				        ,content: '<iframe src="activity.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+				        ,id: "activity" 
+				      })
+				      element.tabChange('tab', 'activity');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'activity');
+					//刷新数据
+				}
+  			},
+  			indexPeople: function(){
+  				if($(".layui-tab-title li[lay-id='user']").length==0){
+				      //新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '用户信息管理' //用于演示
+				        ,content: '<iframe src="user.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+						,id: 'user' 
+				      })
+				      element.tabChange('tab', 'user');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'user');
+				}
+	  			},
+  			indexExamineClub: function(){
+  				if($(".layui-tab-title li[lay-id='examineActivity']").length==0){
+		    		//新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '活动审核' //用于演示
+				        ,content: '<iframe src="examineActivity.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+				        ,id: "examineActivity" 
+				      })
+				      element.tabChange('tab', 'examineActivity');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'examineActivity');
+					//刷新数据
+				}
+  			},
+  			indexExamineActivity: function(){
+  				if($(".layui-tab-title li[lay-id='examineClub']").length==0){
+		    		//新增一个Tab项
+				      element.tabAdd('tab', {
+				        title: '社团审核' //用于演示
+				        ,content: '<iframe src="examineClub.html" scrolling="no" style="width:100%;height:470px;border:0;" ></iframe>'
+				        ,id: "examineClub" 
+				      })
+				      element.tabChange('tab', 'examineClub');
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'activity');
+					//刷新数据
+				}
+	  		},
+	  		quit: function(){
+	  			$.post(
+	  	    			"/xy/admin/quit",
+	  	    	        {},
+	  	    	        function(result){
+	  	    	        	window.location.href = "login.html"
+	  	    	      });
+	  			}
+		  };
+		  
+		  $('.user,.layui-btn').on('click', function(){
+		    var type = $(this).data('type');
+		    active[type] ? active[type].call(this) : '';
+		  });
+});
+</script>
+
+</body>
+</html>

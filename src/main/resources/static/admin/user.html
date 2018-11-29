@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>享悦管理</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="Shortcut Icon" href="../images/xy.ico">
+  <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+<style>
+	*{
+		paddint:0;
+		margin:0;
+	}
+</style>
+</head>
+<body>
+	<div id="toolbar">
+	<blockquote class="layui-elem-quote quoteBox">
+    <form class="layui-form">
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="text"  id="keyword" class="layui-input searchVal" placeholder="请输入搜索的账号名" />
+            </div>
+            <a class="layui-btn search_btn" data-type="look">搜索</a>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-normal addmkwh_btn" data-type="edit">编辑</a>
+        </div>
+        <div class="layui-inline">
+        <a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn" data-type="add">添加</a>
+        </div>
+        <div class="layui-inline">
+        <a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn" data-type="del">删除</a>
+        </div>
+    </form>
+</blockquote>
+	</div>
+	<table class="layui-table" id="table" lay-data="{url:'/xy/user/adminGet'
+										  			,method: 'post'
+										  			,cellMinWidth:80
+										  			,fit:true
+													,page:true
+											  		,limits:[10,30,50,100]
+											  		,height:'full-70'
+	  												,id:'tabId'}" 
+	  		lay-filter="demo">
+		<thead>
+		    <tr>
+		      <th lay-data="{type:'checkbox'}"></th>
+		      <th lay-data="{field:'use_id',width:80,sort:true}">ID</th>
+		      <th lay-data="{field:'account', width:80}">用户名</th>
+		      <th lay-data="{field:'passWord', width:80, sort: true}">密码</th>
+		      <th lay-data="{field:'avaPath', width:80}">头像地址</th>
+		      <th lay-data="{field:'nickName', width: 100}">昵称</th>
+		      <th lay-data="{field:'birth', sort: true}" readonly="true">生日</th>
+		      <th lay-data="{field:'sex', sort: true}">性别</th>
+		      <th lay-data="{field:'school'}">学校</th>
+		      <th lay-data="{field:'academy',sort: true}">学院</th>
+		      <th lay-data="{field:'major'}">专业</th>
+		      <th lay-data="{field:'entryYear'}" readonly="true">入学年份</th>
+		      <th lay-data="{field:'perSign'}">个性签名</th>
+		      <th lay-data="{field:'hobby'}">兴趣爱好</th>
+		      <th lay-data="{field:'homeTown'}">家乡</th>
+		    </tr>
+		  </thead>
+	</table>
+<div id="editDialog" style="display:none;">
+	<form class="layui-form" lay-filter="userInfo" method="post">
+    		<input name="use_id" id="use_id" type="hidden">
+		<div class="layui-form-item">
+		    <label class="layui-form-label">用户名：</label>
+		    <div class="layui-input-block">
+		      <input name="account"  id="account" class="layui-input" style="width:60%">
+		      <span id="tipAccount"></span>
+		    </div>
+		</div>
+		<div class="layui-form-item">
+		    <label class="layui-form-label">密码：</label>
+		    <div class="layui-input-block">
+		      <input name="passWord" id="passWord" class="layui-input" style="width:60%">
+		      <span id="tipPassWord"></span>
+		    </div>
+		</div>
+		<div class="layui-form-item">
+		    <label class="layui-form-label">头像地址：</label>
+		    <div class="layui-input-block">
+		      <input name="avaPath" id="avaPath" class="layui-input" style="width:60%">
+		    </div>
+		</div>
+		<div class="layui-form-item">
+		    <label class="layui-form-label"> 昵称：</label>
+		    <div class="layui-input-block">
+		      <input name="nickName" id="nickName" class="layui-input" style="width:60%">
+		    </div>
+		</div> 
+		<div class="layui-form-item">
+		    <label class="layui-form-label">生日：</label>
+		    <div class="layui-input-block">
+		      <input name="birth" id="birth" readonly class="layui-input date" style="width:60%" placeholder="yyyy-MM-dd">
+		    </div>
+		</div>
+		<div class="layui-form-item">
+		    <label class="layui-form-label">性别：</label>
+		    <div class="layui-input-block">
+		      <input type="radio" name="sex" value="男" title="男" checked="checked">
+      		  <input type="radio" name="sex" value="女" title="女">
+      		  <input type="radio" name="sex" value="秘密" title="秘密">
+		    </div>
+		</div>    
+		<div class="layui-form-item">
+		    <label class="layui-form-label">学校：</label>
+		    <div class="layui-input-block">
+		      <input name="school" id="school" class="layui-input" style="width:60%">
+		    </div>
+		</div> 
+		<div class="layui-form-item">
+		    <label class="layui-form-label">学院：</label>
+		    <div class="layui-input-block">
+		      <input name="academy" id="academy" class="layui-input" style="width:60%">
+		    </div>
+		</div>
+		<div class="layui-form-item">
+		    <label class="layui-form-label">专业：</label>
+		    <div class="layui-input-block">
+		      <input name="major" id="major" class="layui-input" style="width:60%">
+		    </div>
+		</div>         
+		<div class="layui-form-item">
+		    <label class="layui-form-label">入学时间：</label>
+		    <div class="layui-input-block">
+		      <input name="entryYear" id="entryYear" readonly class="layui-input date" style="width:60%" placeholder="yyyy-MM-dd">
+		    </div>
+		</div> 
+		<div class="layui-form-item">
+		    <label class="layui-form-label">个人签名：</label>
+		    <div class="layui-input-block">
+		      <input name="perSign" id="perSign" class="layui-input" style="width:60%">
+		    </div>
+		</div>
+		<div class="layui-form-item">
+		    <label class="layui-form-label">兴趣爱好：</label>
+		    <div class="layui-input-block">
+		      <input name="hobby" id="hobby" class="layui-input" style="width:60%">
+		    </div>
+		</div>         
+		<div class="layui-form-item">
+		    <label class="layui-form-label">家乡：</label>
+		    <div class="layui-input-block">
+		      <input name="homeTown" id="homeTown" class="layui-input" style="width:60%">
+		    </div>
+		</div>              
+  </form>
+</div>
+<script src="../layui/layui.js" charset="utf-8"></script>
+<script>
+	layui.use(['table','element','laydate','form','layer'], function(){
+		//左侧导航栏收缩
+		var element = layui.element;
+		//初始化日期
+		var laydate = layui.laydate;
+		var layer = layui.layer
+		//初始化表单
+		var form = layui.form;
+		//同时绑定多个
+		  lay('.date').each(function(){
+		    laydate.render({
+		      elem: this
+		      ,trigger: 'click'
+		      ,theme: 'molv'
+		    });
+		  });
+		//初始数据表格（方法渲染）
+  		var table = layui.table;
+  		var $ = layui.$;
+  	  	active = {
+  	  	//搜索
+		 look: function(){ //获取选中数据
+	 	     var info = $("#keyword").val();
+	 	     table.reload('tabId', {
+	 	    	 url:'/xy/user/adminGet'
+	 	    	  ,where: { //设定异步数据接口的额外参数，任意设
+	 	    		 account: info
+	 	    	  }
+	 	    	  ,page: {
+	 	    	    curr: 1 //重新从第 1 页开始
+	 	    	  }
+	 	    	});
+	 	    }
+  		//添加
+  	    ,add: function(){ //添加数据
+  	    	//初始化弹出框数据
+  	    	form.val("userInfo", {
+   	    	 "use_id":null
+   	    	,"account": null
+   	    	,"passWord": null
+   	  		,"avaPath":null
+   	  		,"nickName":null
+   	  		,"birth":null
+   	  		,"sex":null
+   	  		,"school":null
+   	  		,"academy":null
+   	  		,"major":null
+   	  		,"entryYear":null
+   	  		,"perSign":null
+   	  		,"hobby":null
+   	  		,"homeTown":null
+   	    	});
+  	    	layer.open({
+	          type: 1
+	          ,title: "添加账户" //不显示标题栏
+	          ,closeBtn: 2
+	          ,area: ['30%', '80%']
+	          ,shade: 0
+	          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+	          ,btn: ['添加', '取消']
+	          ,btnAlign: 'c'//按钮居中
+	          ,moveType: 0 //拖拽模式，0或者1
+	          ,content: $('#editDialog')
+	          ,success: function(layero){
+	            var btn = layero.find('.layui-layer-btn');
+	          //校验账号和密码长度以及是否为空
+	            $("#account").blur(function(){
+	            	if($("#account").val()==""){
+	            		$("#tipAccount").text("账号不能为空");
+	            		$("#tipAccount").css("color","red");
+	            	}else{
+	            		$("#tipAccount").css("display","none");
+	            	}
+	            });
+	            $("#passWord").blur(function(){
+	            	var len = $("#passWord").val().length;
+	            	switch(len){
+	            		case 0: 
+	            			$("#tipPassWord").text("密码不能为空");
+	                		$("#tipPassWord").css("color","red");
+	                		break;
+	            		case 6:
+	            			$("#tipPassWord").css("display","none");
+	                		break;
+	                	default:
+	                		$("#tipPassWord").text("长度应为6位");
+	            			$("#tipPassWord").css("color","red");
+	            			break;
+	            	}
+	            });
+	            	btn.find('.layui-layer-btn0').on('click', function(){
+	            		if($("#account").val()!=""&&$("#passWord").val()!=""){
+	            			var account = $("#account").val();
+			            	var passWord = $("#passWord").val();
+			            	var nickName = $("#nickName").val();
+			            	var birth = $("#birth").val();
+			            	var sex = $("input[type='radio']:checked").val()
+			            	var school = $("#school").val();
+			            	var academy = $("#academy").val();
+			            	var major = $("#major").val();
+			            	var entryYear = $("#entryYear").val();
+			            	var perSign = $("#perSign").val();
+			            	var hobby = $("#hobby").val();
+			            	var homeTown = $("#homeTown").val();
+			            	var avaPath = $("#avaPath").val();
+			            	$.post(
+			            			"/xy/user/add",
+			            	        {
+			            			 account:account,
+			            			 passWord:passWord,
+			            			 nickName:nickName,
+			            			 birth:birth,
+			            			 sex:sex,
+			            			 school:school,
+			            			 academy:academy,
+			            			 major:major,
+			            			 entryYear:entryYear,
+			            			 perSign:perSign,
+			            			 hobby:hobby,
+			            			 homeTown:homeTown,
+			            			 avaPath:avaPath,
+			            				},
+			            	        function(result){
+			            	          table.reload('tabId',{})          
+			            	          layer.msg('添加成功')
+			            	      });
+			            }else{
+			            	layer.msg("很遗憾，由于您输入错误，添加用户失败，请重试");
+			            }
+		        	  });
+	          }
+	        });
+  	    }
+  		//修改
+  	    ,edit: function(){ //修改选中数据
+  	    	var checkStatus = table.checkStatus('tabId');
+    	      var data = checkStatus.data;
+    	      if(data.length==0){
+    	    	  layer.msg("不选择修改用户你让我如何编辑哟")
+    	      }else if(data.length>1){
+    	    	  layer.msg("请不要多选哟")
+    	      }else{
+    	    	  form.val("userInfo", {
+    	    	    	 "use_id":data[0].use_id
+    	    	    	,"account": data[0].account
+    	    	    	,"passWord": data[0].passWord
+    	    	  		,"avaPath":data[0].avaPath
+    	    	  		,"nickName":data[0].nickName
+    	    	  		,"birth":data[0].birth
+    	    	  		,"sex":data[0].sex
+    	    	  		,"school":data[0].school
+    	    	  		,"academy":data[0].academy
+    	    	  		,"major":data[0].major
+    	    	  		,"entryYear":data[0].entryYear
+    	    	  		,"perSign":data[0].perSign
+    	    	  		,"hobby":data[0].hobby
+    	    	  		,"homeTown":data[0].homeTown
+    	    	    	});
+    	  	    	layer.open({
+    	  	          type: 1
+    	  	          ,title: "修改用户信息" //不显示标题栏
+    	  	          ,closeBtn: 2
+    	  	          ,area: ['30%', '80%']
+    	  	          ,shade: 0
+    	  	          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+    	  	          ,btn: ['保存', '取消']
+    	  	          ,btnAlign: 'c'//按钮居中
+    	  	          ,moveType: 0 //拖拽模式，0或者1
+    	  	          ,content: $('#editDialog')
+    	  	          ,success: function(layero){
+    	  	            var btn = layero.find('.layui-layer-btn');
+    	  	            btn.find('.layui-layer-btn0').on('click', function(){
+    	  	            	var use_id = $("#use_id").val();
+    	  	            	var account = $("#account").val();
+    	  	            	var passWord = $("#passWord").val();
+    	  	            	var nickName = $("#nickName").val();
+    	  	            	var birth = $("#birth").val();
+    	  	            	var sex = $("input[type='radio']:checked").val()
+    	  	            	var school = $("#school").val();
+    	  	            	var academy = $("#academy").val();
+    	  	            	var major = $("#major").val();
+    	  	            	var entryYear = $("#entryYear").val();
+    	  	            	var perSign = $("#perSign").val();
+    	  	            	var hobby = $("#hobby").val();
+    	  	            	var homeTown = $("#homeTown").val();
+    	  	            	var avaPath = $("#avaPath").val();
+    	  	            	$.post(
+    	  	            			"/xy/user/edit",
+    	  	            	        {use_id:use_id,
+    	  	            			 account:account,
+    	  	            			 passWord:passWord,
+    	  	            			 nickName:nickName,
+    	  	            			 birth:birth,
+    	  	            			 sex:sex,
+    	  	            			 school:school,
+    	  	            			 academy:academy,
+    	  	            			 major:major,
+    	  	            			 entryYear:entryYear,
+    	  	            			 perSign:perSign,
+    	  	            			 hobby:hobby,
+    	  	            			 homeTown:homeTown,
+    	  	            			 avaPath:avaPath,
+    	  	            				},
+    	  	            	        function(result){
+    	  	            	          table.reload('tabId',{});          
+    	  	            	          layer.msg('保存修改成功');
+    	  	            	          $.post(
+    				            			"/xy/admin/add",
+    				            	        {
+    				            				account: layui.sessionData('userInfo').account,
+    				            			 	details: "修改了用户"+account,
+    				            				},
+    				            	        function(result){
+    				            	      });
+    	  	            	      });
+    	  	        	  });
+    	  	          }
+    	  	        });
+    	      }
+    	      
+  	    }
+  		//删除
+  	    ,del: function(){ //删除选中数据
+  	    	var checkStatus = table.checkStatus('tabId');
+    	    var data = checkStatus.data;
+    	    //判断用户选择了多少行
+    	    if(data.length==0){
+    	    	layer.msg("请选择删除哪一行哟");
+    	    }else{
+    	    	layer.confirm('是否删除？', {icon: 3, title:'提示'}, function(index){
+    	    		  //do something
+    	    		//多行删除
+        	    	for(var i=0;i<data.length;i++){
+    		    	    var use_id = data[i].use_id;
+    		    	    var account = data[i].account;
+    		    	    $.post(
+    		          			"/xy/user/delete",
+    		          	        {use_id:use_id},
+    		          	        function(result){
+    		          	          table.reload('tabId',{}); 
+    		          	        $.post(
+				            			"/xy/admin/add",
+				            	        {
+				            				account: layui.sessionData('userInfo').account,
+				            			 	details: "修改了用户"+account,
+				            				},
+				            	        function(result){
+				            	      });
+    		          	      });
+        	    	}
+		          	layer.msg("已删除"+data.length+"个用户");
+    	    		  layer.close(index);
+    	    		});
+    	    }
+  	    },
+  	  };
+  	  
+  	  $('#toolbar .layui-btn').on('click', function(){
+  	    var type = $(this).data('type');
+  	    active[type] ? active[type].call(this) : '';
+  	  });
+  	//单击行勾选checkbox事件
+  	$(document).on("click",".layui-table-body table.layui-table tbody tr", function () {
+  	    //返回被选元素的属性值。
+  		var index = $(this).attr('data-index');
+  		//查找当前元素的父元素中带有 "layui-table-box" 类的父元素：
+  	    var tableBox = $(this).parents('.layui-table-box');
+  	    //存在固定列
+  	    if (tableBox.find(".layui-table-fixed.layui-table-fixed-l").length>0) {
+  	        tableDiv = tableBox.find(".layui-table-fixed.layui-table-fixed-l");
+  	    } else {
+  	        tableDiv = tableBox.find(".layui-table-body.layui-table-main");
+  	    }
+  	    var checkCell = tableDiv.find("tr[data-index=" + index + "]").find("td div.laytable-cell-checkbox div.layui-form-checkbox I");
+  	    if (checkCell.length>0) {
+  	        checkCell.click();
+  	    }
+  	});
+
+  	$(document).on("click", "td div.laytable-cell-checkbox div.layui-form-checkbox", function (e) {
+  	    e.stopPropagation();
+  	});
+});
+</script>
+
+</body>
+</html>

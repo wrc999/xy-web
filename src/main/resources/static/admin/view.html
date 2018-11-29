@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>享悦管理</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="Shortcut Icon" href="../images/xy.ico">
+  <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+<style>
+	*{
+		paddint:0;
+		margin:0;
+	}
+</style>
+</head>
+<body>
+	<div id="toolbar">
+	<blockquote class="layui-elem-quote quoteBox">
+    <form class="layui-form">
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="text"  id="keyword" class="layui-input searchVal" placeholder="请输入搜索的账号名" />
+            </div>
+            <a class="layui-btn search_btn" data-type="look">搜索</a>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-normal addmkwh_btn" data-type="edit">编辑</a>
+        </div>
+        <div class="layui-inline">
+        <a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn" data-type="add">添加</a>
+        </div>
+        <div class="layui-inline">
+        <a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn" data-type="del">删除</a>
+        </div>
+    </form>
+</blockquote>
+	</div>
+	<table class="layui-table" id="table" lay-data="{url:'/xy/view/adminGet'
+										  			,method: 'post'
+										  			,cellMinWidth:80
+										  			,fit:true
+													,page:true
+											  		,limits:[10,30,50,100]
+											  		,height:'full-70'
+	  												,id:'tabId'}" 
+	  		lay-filter="demo">
+		<thead>
+		    <tr>
+		      <th lay-data="{type:'checkbox'}"></th>
+		      <th lay-data="{field:'view_id',width:80,sort:true}">ID</th>
+		      <th lay-data="{field:'use_id', width:80}">用户ID</th>
+		      <th lay-data="{field:'club_id', width:80}">社团ID</th>
+		      <th lay-data="{field:'photo', width:160}">风景照</th>
+		      <th lay-data="{field:'clubName', width:80}">社团</th>
+		      <th lay-data="{field:'uploadTime', width: 160}">上传时间</th>
+		    </tr>
+		  </thead>
+	</table>
+<div id="editDialog" style="display:none;">
+	<form class="layui-form" lay-filter="view" method="post">
+    		<input name="view_id" id="view_id" type="hidden">
+		<div class="layui-form-item">
+		    <label class="layui-form-label">用户ID：</label>
+		    <div class="layui-input-block">
+		      <input name="use_id"  id="use_id" class="layui-input" style="width:60%">
+		    </div>
+		</div>
+		<div class="layui-form-item">
+		    <label class="layui-form-label">社团ID：</label>
+		    <div class="layui-input-block">
+		      <input name="club_id"  id="club_id" class="layui-input" style="width:60%">
+		    </div>
+		</div>
+		<div class="layui-form-item">
+		    <label class="layui-form-label">风景照：</label>
+		    <div class="layui-input-block">
+		      <input name="photo" id="photo" class="layui-input" style="width:60%">
+		    </div>
+		</div>
+		<div class="layui-form-item">
+		    <label class="layui-form-label">社团：</label>
+		    <div class="layui-input-block">
+		      <input name="clubName" id="clubName" class="layui-input" style="width:60%">
+		    </div>
+		</div>
+  </form>
+</div>
+<script src="../layui/layui.js" charset="utf-8"></script>
+<script>
+	layui.use(['table','element','laydate','form','layer'], function(){
+		//左侧导航栏收缩
+		var element = layui.element;
+		//初始化日期
+		var laydate = layui.laydate;
+		var layer = layui.layer
+		//初始化表单
+		var form = layui.form;
+		//同时绑定多个时间选择器
+		  lay('.date').each(function(){
+		    laydate.render({
+		      elem: this
+		      ,trigger: 'click'
+		      ,theme: 'molv'
+		    });
+		  });
+		//初始数据表格（方法渲染）
+  		var table = layui.table;
+  		var $ = layui.$;
+  	  	active = {
+  	  	//搜索
+		 look: function(){ //获取选中数据
+	 	     var keyword = $("#keyword").val();
+	 	     table.reload('tabId', {
+	 	    	 url:'/xy/view/adminGet'
+	 	    	  ,where: { //设定异步数据接口的额外参数，任意设
+	 	    		 clubName: keyword
+	 	    	  }
+	 	    	  ,page: {
+	 	    	    curr: 1 //重新从第 1 页开始
+	 	    	  }
+	 	    	});
+	 	    }
+  		//添加
+  	    ,add: function(){ //添加数据
+  	    	//初始化弹出框数据
+  	    	form.val("view", {
+   	    	 "view_id":null
+   	    	,"use_id": null
+   	    	,"club_id": null
+   	    	,"photo": null
+   	  		,"clubName":null
+   	    	});
+  	    	layer.open({
+	          type: 1
+	          ,title: "添加分享" //不显示标题栏
+	          ,closeBtn: 2
+	          ,area: ['30%', '80%']
+	          ,shade: 0
+	          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+	          ,btn: ['添加', '取消']
+	          ,btnAlign: 'c'//按钮居中
+	          ,moveType: 0 //拖拽模式，0或者1
+	          ,content: $('#editDialog')
+	          ,success: function(layero){
+	            var btn = layero.find('.layui-layer-btn');
+	            	btn.find('.layui-layer-btn0').on('click', function(){
+			            	var use_id = $("#use_id").val();
+			            	var club_id = $("#club_id").val();
+			            	var photo = $("#photo").val();
+			            	var clubName = $("#clubName").val();
+			            	$.post(
+			            			"/xy/view/add",
+			            	        {
+			            			 use_id: use_id,
+			            			 club_id: club_id,
+			            			 photo: photo,
+			            			 clubName: clubName
+			            				},
+			            	        function(result){
+			            	          table.reload('tabId',{})          
+			            	          layer.msg('添加成功')
+			            	      });
+		        	  });
+	          }
+	        });
+  	    }
+  		//修改
+  	    ,edit: function(){ //修改选中数据
+  	    	var checkStatus = table.checkStatus('tabId');
+    	      var data = checkStatus.data;
+    	      if(data.length==0){
+    	    	  layer.msg("不选择修改用户你让我如何编辑哟")
+    	      }else if(data.length>1){
+    	    	  layer.msg("请不要多选哟")
+    	      }else{
+    	    	  form.val("view", {
+    	    		  	"view_id":data[0].view_id
+    	    		  	,"use_id":data[0].use_id
+    	    		  	,"club_id":data[0].club_id
+    	    	    	,"photo": data[0].photo
+    	    	  		,"clubName":data[0].clubName
+    	    	    	});
+    	  	    	layer.open({
+    	  	          type: 1
+    	  	          ,title: "修改分享信息" //不显示标题栏
+    	  	          ,closeBtn: 2
+    	  	          ,area: ['30%', '80%']
+    	  	          ,shade: 0
+    	  	          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+    	  	          ,btn: ['保存', '取消']
+    	  	          ,btnAlign: 'c'//按钮居中
+    	  	          ,moveType: 0 //拖拽模式，0或者1
+    	  	          ,content: $('#editDialog')
+    	  	          ,success: function(layero){
+    	  	            var btn = layero.find('.layui-layer-btn');
+    	  	            btn.find('.layui-layer-btn0').on('click', function(){
+    	  	            	var view_id = $("#view_id").val();
+    	  	            	var use_id = $("#use_id").val();
+    	  	            	var club_id = $("#club_id").val();
+    	  	            	var photo = $("#photo").val();
+    	  	            	var clubName = $("#clubName").val();
+    	  	            	$.post(
+    	  	            			"/xy/view/edit",
+    	  	            	        {view_id: view_id,
+    	  	            			use_id: use_id,
+    	  	            			club_id: club_id,
+    	  	            			photo: photo,
+    	  	            			clubName: clubName
+    	  	            				},
+    	  	            	        function(result){
+    	  	            	          table.reload('tabId',{});          
+    	  	            	          layer.msg('保存修改成功');
+    	  	            	          $.post(
+    				            			"/xy/admin/add",
+    				            	        {
+    				            				account: layui.sessionData('userInfo').account,
+    				            			 	details: "修改了"+account+"社团照片",
+    				            				},
+    				            	        function(result){
+    				            	      });
+    	  	            	      });
+    	  	        	  });
+    	  	          }
+    	  	        });
+    	      }
+    	      
+  	    }
+  		//删除
+  	    ,del: function(){ //删除选中数据
+  	    	var checkStatus = table.checkStatus('tabId');
+    	    var data = checkStatus.data;
+    	    //判断用户选择了多少行
+    	    if(data.length==0){
+    	    	layer.msg("请选择删除哪一行哟");
+    	    }else{
+    	    	layer.confirm('是否删除？', {icon: 3, title:'提示'}, function(index){
+    	    		  //do something
+    	    		//多行删除
+        	    	for(var i=0;i<data.length;i++){
+    		    	    var view_id = data[i].view_id;
+    		    	    $.post(
+    		          			"/xy/view/delete",
+    		          	        {view_id:view_id},
+    		          	        function(result){
+    		          	          table.reload('tabId',{});          
+    		          	      });
+        	    	}
+		          	layer.msg("已删除"+data.length+"个用户");
+    	    		  layer.close(index);
+    	    		});
+    	    }
+  	    },
+  	  };
+  	  
+  	  $('#toolbar .layui-btn').on('click', function(){
+  	    var type = $(this).data('type');
+  	    active[type] ? active[type].call(this) : '';
+  	  });
+  	//单击行勾选checkbox事件
+  	$(document).on("click",".layui-table-body table.layui-table tbody tr", function () {
+  	    //返回被选元素的属性值。
+  		var index = $(this).attr('data-index');
+  		//查找当前元素的父元素中带有 "layui-table-box" 类的父元素：
+  	    var tableBox = $(this).parents('.layui-table-box');
+  	    //存在固定列
+  	    if (tableBox.find(".layui-table-fixed.layui-table-fixed-l").length>0) {
+  	        tableDiv = tableBox.find(".layui-table-fixed.layui-table-fixed-l");
+  	    } else {
+  	        tableDiv = tableBox.find(".layui-table-body.layui-table-main");
+  	    }
+  	    var checkCell = tableDiv.find("tr[data-index=" + index + "]").find("td div.laytable-cell-checkbox div.layui-form-checkbox I");
+  	    if (checkCell.length>0) {
+  	        checkCell.click();
+  	    }
+  	});
+
+  	$(document).on("click", "td div.laytable-cell-checkbox div.layui-form-checkbox", function (e) {
+  	    e.stopPropagation();
+  	});
+});
+</script>
+
+</body>
+</html>

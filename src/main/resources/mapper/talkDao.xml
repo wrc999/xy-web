@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wrc.xy.dao.talkDao">
+	<!-- 增加分享 -->
+	<insert id="talkAdd" parameterType="talk">
+		insert into talk(use_id,talktime,talkcontent,talkphoto,topicName) 
+		values(#{use_id},#{talktime},#{talkcontent},#{talkphoto},#{topicName})
+	</insert>
+	<!-- 删除分享 -->
+	<delete id="talkDelete" parameterType="talk">
+		delete from talk where talk_id=#{talk_id}
+	</delete>
+	<!-- 查询分享 -->
+	<select id="talkSelect" parameterType="talk" resultType="talk">
+		select t.*,u.account,u.school,u.nickName,u.avaPath from talk t,userinfo u where t.use_id=u.use_id
+		<if test="use_id!=null and use_id!=''">
+			and t.use_id = #{use_id}
+		</if>
+		<if test="school!=null and school!=''">
+			and u.school=#{school}
+		</if>
+		<if test="topicName!=null and topicName!=''">
+			and t.topicName=#{topicName}
+		</if>
+	</select>
+	
+	<!-- 查询回复 -->
+	<select id="replySelect" resultType="ReplyTalk">
+		select r.*,u.nickName from replytalk r,userinfo u where r.use_id=u.use_id
+	</select>
+	<!-- 增加回复 -->
+	<insert id="replyTalkAdd" parameterType="ReplyTalk">
+		insert into replytalk(talk_id,use_id,replytime,replycontent) 
+		values(#{talk_id},#{use_id},#{replytime},#{replycontent})
+	</insert>
+	
+	<update id="talkUpdate" parameterType="talk">
+		update talk
+		<!-- 剔除追加到条件末尾的任何不相关的逗号 -->
+		<set>
+			<if test="use_id!=null  ">
+				use_id=#{use_id},
+			</if>
+			<if test="talkcontent!=null">
+				talkcontent=#{talkcontent},
+			</if>
+			<if test="talkphoto!=null and talkphoto!=''  ">
+				talkphoto=#{talkphoto},
+			</if>
+		</set>
+		where talk_id=#{talk_id}
+	</update>
+	<!-- 增加点赞 -->
+	<insert id="praiseInsert" parameterType="praise" useGeneratedKeys="true" keyProperty="praise_id">
+		insert into praise(talk_id,use_id,nickName) 
+		values(#{talk_id},#{use_id},#{nickName})
+	</insert>
+	<!-- 取消点赞 -->
+	<delete id="praiseDelete" parameterType="praise">
+		delete from praise where praise_id=#{praise_id}
+	</delete>
+	<!-- 查询点赞 -->
+	<select id="praiseSelect" resultType="praise">
+		select * from praise 
+	</select>
+	
+	<!-- 发布话题 -->
+	<insert id="topicAdd" parameterType="topic">
+		insert into topic(account,topicName,topicIntro,topicPic,topicCreateTime) 
+		values(#{account},#{topicName},#{topicIntro},#{topicPic},#{topicCreateTime})
+	</insert>
+	<!-- 修改话题 -->
+	<update id="topicEdit" parameterType="topic">
+		update topic
+		<!-- 剔除追加到条件末尾的任何不相关的逗号 -->
+		<set>
+			<if test="account!=null and account!='' ">
+				account=#{account},
+			</if>
+			<if test="topicName!=null and topicName!='' ">
+				topicName=#{topicName},
+			</if>
+			<if test="topicIntro!=null and topicName!='' ">
+				topicName=#{topicName},
+			</if>
+			<if test="topicPic!=null and topicPic!='' ">
+				topicPic=#{topicPic},
+			</if>
+		</set>
+		where topic_id=#{topic_id}
+	</update>
+	<!-- 删除话题 -->
+	<delete id="topicDelete" parameterType="topic">
+		delete from topic where topic_id=#{topic_id}
+	</delete>
+	<!-- 查询话题 -->
+	<select id="topicGet" parameterType="topic" resultType="topic">
+		select * from topic 
+		<where>
+			<if test="topicName!=null and topicName!=''">
+				 topicName like "%${topicName}%"
+			</if>
+		</where>
+	</select>
+	<!-- 查询话题讨论数 -->
+	<select id="getTopicJoins" parameterType="String" resultType="int">
+		select count(*) from talk where topicName=#{topicName} 
+	</select>
+</mapper>

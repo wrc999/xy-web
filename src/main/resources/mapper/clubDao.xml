@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wrc.xy.dao.clubDao">
+	<!-- 增加社团 -->
+	<insert id="clubAdd" parameterType="club" useGeneratedKeys="true" keyProperty="club_id">
+		insert into club(account,groupId,clubSchool,clubAva,clubName,clubIntro,sort,createTime,clubSchool,clubSlogan) 
+		values(#{account},#{groupId},#{clubSchool},#{clubAva},#{clubName},#{clubIntro},#{sort},#{createTime},#{clubSchool},#{clubSlogan})
+	</insert>
+	<!-- 社团信息修改 -->
+	<update id="clubEdit" parameterType="club">
+		update club
+		<!-- 剔除追加到条件末尾的任何不相关的逗号 -->
+		<set>
+			<if test="account!=null and account!='' ">
+				account=#{account},
+			</if>
+			<if test="clubName!=null and clubName!='' ">
+				clubName=#{clubName},
+			</if>
+			<if test="groupId!=null and groupId!='' ">
+				groupId=#{groupId},
+			</if>
+			<if test="clubAva!=null and clubAva!='' ">
+				clubAva=#{clubAva},
+			</if>
+			<if test="clubSlogan!=null and clubSlogan!='' ">
+				clubSlogan=#{clubSlogan},
+			</if>
+			<if test="clubIntro!=null and clubIntro!='' ">
+				clubIntro=#{clubIntro},
+			</if>
+			<if test="createTime!=null and createTime!='' ">
+				createTime=#{createTime},
+			</if>
+			<if test="clubSchool!=null and clubSchool!='' ">
+				clubSchool=#{clubSchool},
+			</if>
+			<if test="sort!=null and sort!='' ">
+				sort=#{sort},
+			</if>
+			<if test="clubPass!=null and clubPass!='' ">
+				clubPass=#{clubPass},
+			</if>
+		</set>
+		where club_id=#{club_id}
+	</update>
+	<!-- 加入社团 -->
+	<insert id="clubJoin" parameterType="clubmember">
+		insert into clubmember(member_id,account,club_id,joinTime) 
+		values(#{member_id},#{account},#{club_id},#{joinTime})
+	</insert>
+	<!-- 删除社团 -->
+	<delete id="clubDelete" parameterType="club">
+		delete from club where club_id=#{club_id}
+	</delete>
+	<update id="changeOwner" parameterType="club">
+		update club set account=#{account} where groupId=#{groupId}
+	</update>
+	<!-- 退出社团 -->
+	<delete id="clubQuit" parameterType="clubmember">
+		delete from clubmember where account=#{account}
+			<if test="club_id!=null and club_id!=''">
+				and club_id=#{club_id}
+			</if>
+			<if test="groupId!=null and groupId!=''">
+				and groupId=#{groupId}
+			</if>
+	</delete>
+	<!-- 查询所有社团 -->
+	<select id="clubSelect" parameterType="club" resultType="club">
+		select * from club where clubPass=1
+		<if test="clubName!=null and clubName!=''">
+			and clubName = #{clubName}
+		</if>
+	</select>
+	<!-- 查询所有未审核社团 -->
+	<select id="adminGetExamine" parameterType="club" resultType="club">
+		select * from club where clubPass=0
+		<if test="clubName!=null and clubName!=''">
+			and clubName = #{clubName}
+		</if>
+	</select>
+	<!-- 查询所有社团 -->
+	<select id="findByAccount" parameterType="String" resultType="club">
+		select * from club where clubPass=1 and account=#{account}
+	</select>
+	<!-- 根据id查询社团 -->
+	<select id="findById" parameterType="club" resultType="club">
+		select * from club where club_id=#{club_id} and clubPass=1
+	</select>
+	<!-- 搜索社团 -->
+	<select id="clubSearch" parameterType="club" resultType="club">
+		select * from club where clubName like "%${clubName}%" and clubPass=1
+	</select>
+	
+	<!-- 添加关注 -->
+	<insert id="focus" parameterType="clubfocus">
+		insert into clubfocus(focus_id,account,club_id) 
+		values(#{focus_id},#{account},#{club_id})
+	</insert>
+	<!-- 取消关注 -->
+	<delete id="unfocus" parameterType="clubfocus">
+		delete from clubfocus where club_id=#{club_id} and account=#{account}
+	</delete>
+	<!-- 查询社团关注 -->
+	<select id="focusGet" parameterType="clubfocus" resultType="clubfocus">
+		select * from clubfocus where club_id=#{club_id}
+	</select>
+	<!-- 查询用户关注 -->
+	<select id="findMyFocus" parameterType="String" resultType="clubfocus">
+		select * from clubfocus where account=#{account}
+	</select>
+	
+	<!-- 查询成员 -->
+	<select id="memberGet" parameterType="club" resultType="clubmember">
+		select * from clubmember where club_id=#{club_id}
+	</select>
+	<!-- 查询社团活动 -->
+	<select id="activityGet" parameterType="club" resultType="activity">
+		select * from activity where account=#{account}
+	</select>
+</mapper>

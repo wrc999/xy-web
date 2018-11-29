@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wrc.xy.dao.activityDao">
+	<!-- 添加活动-->
+	<insert id="add" parameterType="activity" useGeneratedKeys="true" keyProperty="activity_id">
+		insert into activity(account,name,startTime,endTime,place,ava,intro,keyWord,onLine,pic1,pic2,pic3,peopleNum,createTime) 
+		values(#{account},#{name},#{starttime},#{endtime},#{place},#{ava},#{intro},#{keyword},#{online},#{pic1},#{pic2},#{pic3},#{peopleNum},#{createTime})
+	</insert>
+	<update id="edit" parameterType="activity">
+	update activity
+		<!-- 剔除追加到条件末尾的任何不相关的逗号 -->
+		<set>
+			<if test="account!=null and account!='' ">
+				account=#{account},
+			</if>
+			<if test="name!=null and name!='' ">
+				name=#{name},
+			</if>
+			<if test="starttime!=null and starttime!='' ">
+				startTime=#{starttime},
+			</if>
+			<if test="endtime!=null and endtime!='' ">
+				endTime=#{endtime},
+			</if>
+			<if test="place!=null and place!='' ">
+				place=#{place},
+			</if>
+			<if test="peopleNum!=null and peopleNum!='' ">
+				peopleNum=#{peopleNum},
+			</if>
+			<if test="ava!=null and ava!='' ">
+				ava=#{ava},
+			</if>
+			<if test="intro!=null and intro!='' ">
+				intro=#{intro},
+			</if>
+			<if test="keyword!=null and keyword!='' ">
+				keyWord=#{keyword},
+			</if>
+			<if test="online!=null and online!='' ">
+				onLine=#{online},
+			</if>
+			<if test="pic1!=null and pic1!='' ">
+				pic1=#{pic1},
+			</if>
+			<if test="pic2!=null and pic2!='' ">
+				pic2=#{pic2},
+			</if>
+			<if test="pic3!=null and pic3!='' ">
+				pic3=#{pic3},
+			</if>
+			<if test="activityPass!=null and activityPass!='' ">
+				activityPass=#{activityPass},
+			</if>
+		</set>
+		where activity_id=#{activity_id}
+	</update>
+	<delete id="delete" parameterType="activity">
+		delete from activity where activity_id=#{activity_id}
+	</delete>
+	<select id="getByAccount" parameterType="String" resultType="activity">
+		select * from activity where activityPass=1
+			<!-- 如果传入参数为基本类型，test中参数名必须为_parameter，其他位置随意 -->
+			<if test="_parameter!=null and _parameter!=''">
+				and account=#{account}
+			</if>
+	</select>
+	<select id="getExamine" parameterType="Integer" resultType="activity">
+		select * from activity where activityPass=0
+			<if test="_parameter!=null">
+				 and onLine=#{online}
+			</if>
+	</select>
+	<select id="getFalseExamine" parameterType="Integer" resultType="activity">
+		select * from activity where activityPass=2
+			<if test="_parameter!=null">
+				 and onLine=#{online}
+			</if>
+	</select>
+	<select id="getOnLine" parameterType="String" resultType="activity">
+		select * from activity where activityPass=1 and online=1
+			<if test="_parameter!=null and _parameter!=''">
+				and account=#{account}
+			</if>
+	</select>
+	<select id="getUnderLine" parameterType="String" resultType="activity">
+		select * from activity where activityPass=1 and online=0
+			<if test="_parameter!=null and _parameter!=''">
+				and account=#{account}
+			</if>
+	</select>
+	<!-- 搜索活动 -->
+	<select id="activitySearch" parameterType="String" resultType="activity">
+		select * from activity where name like "%${value}%" and activityPass=1
+	</select>
+	<select id="getByactivityId" parameterType="Integer" resultType="activity">
+		select * from activity where activity_id=#{activity_id} and activityPass=1
+	</select>
+
+	<insert id="joinsAdd" parameterType="activityjoins">
+		insert into activityjoins(account,activity_id,name,contact) values(#{account},#{activity_id},#{name},#{contact})
+	</insert>
+	<select id="joinsGet" parameterType="Integer" resultType="activityjoins">
+		select * from activityjoins 
+		<where>
+			<if test="_parameter>0">
+				activity_id=#{activity_id}
+			</if>
+		</where>
+	</select>
+	<delete id="joinsDelete" parameterType="activityjoins">
+		delete from activityjoins where activity_id=#{activity_id} and account=#{account}
+	</delete>
+	<insert id="praiseAdd" parameterType="activitypraise">
+		insert into activitypraise(account,activity_id) values(#{account},#{activity_id})
+	</insert>
+	<select id="praiseGet" parameterType="Integer" resultType="activitypraise">
+		select * from activitypraise 
+		<where>
+			<if test="_parameter>0">
+				activity_id=#{activity_id}
+			</if>
+		</where>
+	</select>
+	<delete id="praiseDelete" parameterType="activitypraise">
+		delete from activitypraise where activity_id=#{activity_id} and account=#{account}
+	</delete>
+</mapper>

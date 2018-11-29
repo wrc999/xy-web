@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wrc.xy.dao.viewDao">
+	<!-- 添加 -->
+	<insert id="add" parameterType="view">
+		insert into view(use_id,photo,clubName,uploadTime) 
+		values(#{use_id},#{photo},#{clubName},#{uploadTime})
+	</insert>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="view">
+		delete from view where view_id=#{view_id}
+	</delete>
+	<!-- 查询 -->
+	<select id="get" parameterType="view" resultType="view">
+		select * from view 
+		<where>
+			<if test="clubName!=null and clubName!=''">
+				clubName=#{clubName}
+			</if>
+			<if test="use_id!=null and use_id!=''">
+				use_id=#{use_id}
+			</if>
+			<if test="club_id!=null and club_id!=''">
+				club_id=#{club_id}
+			</if>
+		</where>
+	</select>
+	<update id="viewUpdate" parameterType="view">
+		update view
+		<!-- 剔除追加到条件末尾的任何不相关的逗号 -->
+		<set>
+			<if test="use_id!=null  ">
+				use_id=#{use_id},
+			</if>
+			<if test="photo!=null">
+				photo=#{photo},
+			</if>
+			<if test="clubName!=null">
+				clubName=#{clubName},
+			</if>
+		</set>
+		where view_id=#{view_id}
+	</update>
+</mapper>

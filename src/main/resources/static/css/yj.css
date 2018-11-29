@@ -1,0 +1,174 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	margin-left: 5%;
+	margin-right: 5%;
+}
+a:hover{color: rgb(93,169,249);text-decoration: none;}
+span:hover{
+	color:rgb(93,169,249);
+	cursor:pointer;
+}
+a{
+	text-decoration: none;
+	font-family: "PingFang SC","Hiragino Sans GB","Microsoft Yahei";	
+	font-size: 18px;
+	color: black;
+}
+h3{
+	color: rgb(93,169,249);
+}
+.register:hover{
+	background-color: rgb(93,169,249);
+}
+.register a:hover{
+	color: black;
+}
+.top{
+	width: 100%;
+	height: 120px;
+}
+.top_logo{
+	width: 30%;
+	height: 120px;
+	float: left;
+}
+.top_menu{
+	width: 40%;
+	height: 120px;
+	float: left;
+	text-align: center;
+}
+.top_login{
+	width: 30%;
+	height: 120px;
+	float: left;
+}
+.yj{
+	border-bottom: 2px solid rgb(93,169,249);
+}
+.yj a{
+	color: rgb(93,169,249);
+}
+.ul li{
+	list-style: none;
+	float: left;
+	line-height: 25px;
+	position: relative;
+	top: 36px;
+	left: 40px;
+	padding: 0 20px 15px;
+}
+.login_word{
+	font-size: 14px;
+	position: relative;
+	top: 70px;
+	left: 90px;
+	color: red;
+	width: 270px;
+}
+.register{
+	width: 70px;
+	height: 40px;
+	color: black;
+	border: 2px solid rgb(93,169,249);
+	border-radius:10px; 
+	position: relative;
+	bottom: 30px;
+	float: left;
+}
+.register_word{
+	position: relative;
+	top: 20%;
+	left: 20%;
+}
+.login{
+	position: relative;
+	left: 100px;
+}
+table tr{
+	height: 30px;
+}
+.edit{
+	width: 100%;
+	line-height: 34px;
+	background-repeat: no-repeat;
+}
+.tr1{
+	background-color: rgb(230,240,245);
+}
+.head{
+	text-align: center;
+	height: 100px;
+}
+.top1{
+	width: 100%;
+	height: 20px;
+}
+.left1{
+	width: 20%;
+	float: left;
+}
+.right1{
+	width: 80%;
+	float: right;
+}
+.list1{
+	height: 100%;
+	width: 100%;
+}
+.top2{
+	width: 100%;
+	height:350px;
+}
+.left2{
+	width: 20%;
+	float: left;
+}
+.left2-1{
+	width: 100%;
+	line-height: 34px;
+	background-color: rgb(180,216,244);
+	float: left;
+}
+.right2{
+	width: 80%;
+	float: left;
+	height:350px;
+}
+.right2-1{
+	width: 100%;
+	line-height: 34px;
+	background-color: rgb(190,230,249);
+	float: left;
+}
+.save{
+	wieth:40px;
+	height:40px;
+	margin-left:50%;
+	border:1px solid rgb(190,230,249);
+	border-radius:10px; 
+}
+.save:hover{
+	background-color: rgb(93,169,249);
+	cursor:pointer;
+}
+.top3{
+	width: 100%;
+	height:200px;
+}
+.right3{
+	width: 80%;
+	float: left;
+	height:200px;
+}
+.tt-inner{
+			display:inline-block;
+			line-height:12px;
+			padding-top:5px;
+		}
+		.tt-inner img{
+			border:0;
+		}

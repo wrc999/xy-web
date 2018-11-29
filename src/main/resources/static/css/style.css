@@ -1,0 +1,24 @@
+
+#loginDiv-outside{
+	background-color:#EDEDED;width:470px;height:340px;
+	padding:2px;margin-top:10px;
+	border-radius:20px;
+	position:absolute;left:75%;margin-left:-240px;top:100px;
+	font-family:宋体;font-size:22px;font-weight:bold;color:#205AA7;
+	filter:alpha(opacity:30); opacity:0.6;
+}
+
+#loginDiv-inside{
+	width:100%;height:100%;
+	padding-top:0px;
+	text-align:left;
+}
+.line a:link{text-decoration:none;padding: 15px;font-size:20px;font-family: 宋体;}
+.line a:hover{text-decoration: underline;}
+
+#registDiv{
+	border-radius:20px;
+	padding:2px;margin-top:10px;
+	font-family: 宋体;
+	font-size:25px;
+}

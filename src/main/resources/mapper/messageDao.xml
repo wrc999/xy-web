@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wrc.xy.dao.messageDao">
+		
+		<insert id="messageAdd" parameterType="message">
+			insert into message
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="sendAccount != null">
+			    	sendAccount,
+			    </if>
+				<if test="receiveAccount != null">
+			    	receiveAccount,
+			    </if>
+				<if test="root != null">
+			    	root,
+			    </if>
+				<if test="reason != null">
+			    	reason,
+			    </if>
+				<if test="club_id != ''">
+			    	club_id,
+			    </if>
+				<if test="activity_id != ''">
+			    	activity_id,
+			    </if>
+			</trim>
+			<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="sendAccount != null">
+			    	#{sendAccount},
+			    </if>
+				<if test="receiveAccount != null">
+			    	#{receiveAccount},
+			    </if>
+				<if test="root != null">
+			    	#{root},
+			    </if>
+				<if test="reason != null">
+			    	#{reason},
+			    </if>
+				<if test="club_id != ''">
+			    	#{club_id},
+			    </if>
+				<if test="activity_id != ''">
+			    	#{activity_id},
+			    </if>
+			</trim>
+		</insert>
+		<delete id="messageDelete" parameterType="message">
+			delete from message where message_id=#{message_id}
+		</delete>
+		<update id="messageEdit" parameterType="message">
+			update message set result=#{result} where message_id=#{message_id}
+		</update>
+		<select id="messageSelect" parameterType="String" resultType="message">
+			select * from message where receiveAccount=#{receiveAccount}
+		</select>
+		
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wrc.xy.dao.userDao">
+
+	<!-- 增加 -->
+	<insert id="userAdd"  parameterType="userinfo">
+		insert into 
+		userinfo(account,passWord,avaPath,nickName,birth,sex,school,academy,major,entryYear,perSign,hobby,homeTown) 
+		values(#{account},#{passWord},#{avaPath},#{nickName},#{birth},#{sex},
+		#{school},#{academy},#{major},#{entryYear},#{perSign},#{hobby},#{homeTown})
+	</insert>
+	<!-- 增加意见反馈 -->
+	<insert id="userSuggestAdd"  parameterType="suggest">
+		insert into 
+		suggest(use_id,suggestcontent,suggesttime) 
+		values(#{use_id},#{suggestcontent},#{suggesttime})
+	</insert>
+	<!-- 登录 -->
+	<select id="login" parameterType="userinfo" resultType="userinfo">
+		select * from userinfo where account = #{account} and passWord=#{passWord}
+	</select>
+	<!-- 查询 -->
+	<select id="userGet" parameterType="userinfo" resultType="userinfo">
+		select * from userinfo where use_id=#{use_id}
+	</select>
+	<!-- 后台查询 -->
+	<select id="userAdminGet" parameterType="userinfo" resultType="userinfo">
+		select * from userinfo 
+		<where>
+			<if test=" account!=null and account!=''">
+				account like "%${account}%"
+			</if>
+		</where>
+	</select>
+	<!-- 删除 -->
+	<delete id="userDelete" parameterType="userinfo">
+		delete from userinfo where use_id=#{use_id}
+	</delete>
+	<!-- 修改 -->
+	<update id="userUpdate" parameterType="userinfo">
+		update userinfo
+		<!-- 剔除追加到条件末尾的任何不相关的逗号 -->
+		<set>
+			<if test="avaPath!=null  ">
+				avaPath=#{avaPath},
+			</if>
+			<if test="passWord!=null and passWord!=''  ">
+				passWord=#{passWord},
+			</if>
+			<if test="nickName!=null ">
+				nickName=#{nickName},
+			</if>
+			<choose>
+                <when test="birth!=null and birth!=''">
+                    birth=#{birth},
+                </when>
+                <otherwise>
+                    birth=null,
+                </otherwise>
+            </choose>
+			<if test="sex!=null  ">
+				sex=#{sex},
+			</if>
+			<if test="school!=null  ">
+				school=#{school},
+			</if>
+			<if test="academy!=null  ">
+				academy=#{academy},
+			</if>
+			<if test="major!=null">
+				major=#{major},
+			</if>
+			<choose>
+                <when test="entryYear!=null and entryYear!=''">
+                    entryYear=#{entryYear},
+                </when>
+                <otherwise>
+                    entryYear=null,
+                </otherwise>
+            </choose>
+			<if test="perSign!=null  ">
+				perSign=#{perSign},
+			</if>
+			<if test="hobby!=null  ">
+				hobby=#{hobby},
+			</if>
+			<if test="homeTown!=null  ">
+				homeTown=#{homeTown},
+			</if>
+		</set>
+		where use_id=#{use_id}
+	</update>
+	<!-- 修改密码 -->
+	<update id="changePassWord" parameterType="userinfo">
+		update userinfo
+		<set>
+			<if test="newPassWord!=null ">
+				passWord=#{newPassWord}
+			</if>
+		</set>
+		where use_id=#{use_id}
+	</update>
+
+</mapper>
