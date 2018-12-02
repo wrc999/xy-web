@@ -18,4 +18,5 @@ public interface userDao {
 	public ArrayList<userinfo> userAdminGet(userinfo user);
 	public void changePassWord(userinfo user);
 	public userinfo login(userinfo user);
+	public ArrayList<suggest> adminGetSuggest(suggest suggest);
 }

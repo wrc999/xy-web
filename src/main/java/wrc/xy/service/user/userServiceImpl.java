@@ -71,6 +71,11 @@ public class userServiceImpl implements userService{
 		// TODO Auto-generated method stub
 		ud.changePassWord(user);
 	}
+	@Override
+	public ArrayList<suggest> adminGetSuggest(suggest suggest) {
+		// TODO Auto-generated method stub
+		return ud.adminGetSuggest(suggest);
+	}
 
 
 }

@@ -82,6 +82,35 @@ public class user {
 	}
 	
 	//后台查询用户接口
+	@RequestMapping("/adminGetSuggest")
+	public  Map<String, Serializable> adminGetSuggest(suggest suggest,String limit,String page){
+		int pageSize = 10;
+		if(limit != null && !limit.equals("")){
+			pageSize = Integer.parseInt(limit);
+		}
+		int page1 = 1;
+		if(page != null && !page.equals("")){
+			page1 = Integer.parseInt(page);
+		}
+		ArrayList<suggest> suggestList = (ArrayList<suggest>) us.adminGetSuggest(suggest);
+		int total = suggestList.size();
+		ArrayList<suggest> suggestList1 = new ArrayList<suggest>();
+		Map<String, Serializable> resultMap = new HashMap<String, Serializable>();
+		resultMap.put("count", total);
+		resultMap.put("msg", "");
+		resultMap.put("code", 0);
+		if(page != null && page.length() > 0 && limit!=null && limit.length()>0){
+			for(int i = (page1-1)*pageSize ; i< page1*pageSize && i< total;i++){
+				suggestList1.add(suggestList.get(i));
+			}
+			resultMap.put("data", suggestList1);
+			return resultMap;
+		}else{
+			resultMap.put("data", suggestList);
+			return resultMap;
+		}
+	}
+	//后台查询用户接口
 	@RequestMapping("/adminGet")
 	public  Map<String, Serializable> adminGet(userinfo user,String limit,String page){
 		int pageSize = 10;

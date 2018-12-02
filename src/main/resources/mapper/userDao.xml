@@ -34,6 +34,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 	</select>
+	<!-- 后台查询意见反馈 -->
+	<select id="adminGetSuggest" parameterType="suggest" resultType="suggest">
+		select * from suggest 
+		<where>
+			<if test=" suggestcontent!=null and suggestcontent!=''">
+				suggestcontent like "%${suggestcontent}%"
+			</if>
+		</where>
+	</select>
 	<!-- 删除 -->
 	<delete id="userDelete" parameterType="userinfo">
 		delete from userinfo where use_id=#{use_id}

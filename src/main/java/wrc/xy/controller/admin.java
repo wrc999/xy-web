@@ -1,6 +1,9 @@
 package wrc.xy.controller;
 
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import wrc.xy.entity.activity;
+import wrc.xy.entity.adminAccount;
 import wrc.xy.entity.adminInfo;
 import wrc.xy.entity.adminLog;
 import wrc.xy.entity.club;
@@ -35,27 +39,44 @@ public class admin {
 	private adminService ads;
 	
 	@RequestMapping("login")
-	public  String add(userinfo info,HttpServletRequest request) throws Exception {
+	public  adminAccount add(adminAccount info,HttpServletRequest request) throws Exception {
 		if(info.getPassWord()!=null && info.getPassWord()!="") {
 			info.setPassWord(MD5Utils.md5(info.getPassWord()));
 		}
-		String account = ads.login(info);
-		if(account!=null) {
+		adminAccount user = ads.login(info);
+		if(user!=null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("account", account);
+			session.setAttribute("account", user.getAccount());
 		}
-		return account;
+		return user;
 	}
 	@RequestMapping("quit")
 	public  void quit(HttpSession session) throws Exception {
 		session.removeAttribute("account");
 	}
 	
+	//添加日志
 	@RequestMapping("add")
 	public  void add(adminLog info) throws Exception {
 		info.setCreateTime(DateUtil.getCurrentTime());
 		ads.adminLogAdd(info);
 	}
+	
+	//添加用户
+	@RequestMapping("/adminAdd")
+	public  String adminAdd(adminAccount admin) throws SQLException{
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		admin.setCreateTime(df.format(new Date()));
+		admin.setPassWord(MD5Utils.md5(admin.getPassWord()));
+		adminAccount adminAccount = ads.adminGetByAccount(admin.getApplyAccount());
+		if(adminAccount!=null && adminAccount.getPower().equals("super")) {
+			ads.adminAdd(admin);
+			return "1";
+		}else {
+			return "2";
+		}
+	}
+	
 	@RequestMapping("getLog")
 	public  ArrayList<adminLog> getLog() throws Exception {
 		return ads.adminLogSelect();

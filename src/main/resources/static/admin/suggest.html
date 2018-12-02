@@ -37,7 +37,7 @@
     </form>
 </blockquote>
 	</div>
-	<table class="layui-table" id="table" lay-data="{url:'/xy/view/adminGet'
+	<table class="layui-table" id="table" lay-data="{url:'/xy/user/adminGetSuggest'
 										  			,method: 'post'
 										  			,cellMinWidth:80
 										  			,fit:true
@@ -49,18 +49,16 @@
 		<thead>
 		    <tr>
 		      <th lay-data="{type:'checkbox'}"></th>
-		      <th lay-data="{field:'view_id',sort:true}">ID</th>
+		      <th lay-data="{field:'suggest_id',sort:true}">ID</th>
 		      <th lay-data="{field:'use_id'}">用户ID</th>
-		      <th lay-data="{field:'club_id'}">社团ID</th>
-		      <th lay-data="{field:'photo'}">风景照</th>
-		      <th lay-data="{field:'clubName'}">社团</th>
-		      <th lay-data="{field:'uploadTime'}">上传时间</th>
+		      <th lay-data="{field:'suggestcontent'}">反馈内容</th>
+		      <th lay-data="{field:'suggesttime'}">反馈时间</th>
 		    </tr>
 		  </thead>
 	</table>
 <div id="editDialog" style="display:none;">
 	<form class="layui-form" lay-filter="view" method="post">
-    		<input name="view_id" id="view_id" type="hidden">
+    		<input name="suggest_id" id="suggest_id" type="hidden">
 		<div class="layui-form-item">
 		    <label class="layui-form-label">用户ID：</label>
 		    <div class="layui-input-block">
@@ -68,21 +66,15 @@
 		    </div>
 		</div>
 		<div class="layui-form-item">
-		    <label class="layui-form-label">社团ID：</label>
+		    <label class="layui-form-label">反馈内容：</label>
 		    <div class="layui-input-block">
-		      <input name="club_id"  id="club_id" class="layui-input" style="width:60%">
+		      <input name="suggestcontent"  id="suggestcontent" class="layui-input" style="width:60%">
 		    </div>
 		</div>
 		<div class="layui-form-item">
-		    <label class="layui-form-label">风景照：</label>
+		    <label class="layui-form-label">反馈时间：</label>
 		    <div class="layui-input-block">
-		      <input name="photo" id="photo" class="layui-input" style="width:60%">
-		    </div>
-		</div>
-		<div class="layui-form-item">
-		    <label class="layui-form-label">社团：</label>
-		    <div class="layui-input-block">
-		      <input name="clubName" id="clubName" class="layui-input" style="width:60%">
+		      <input name="suggesttime" id="suggesttime" class="layui-input" style="width:60%">
 		    </div>
 		</div>
   </form>
@@ -113,9 +105,9 @@
 		 look: function(){ //获取选中数据
 	 	     var keyword = $("#keyword").val();
 	 	     table.reload('tabId', {
-	 	    	 url:'/xy/view/adminGet'
+	 	    	 url:'/xy/user/adminGetSuggest'
 	 	    	  ,where: { //设定异步数据接口的额外参数，任意设
-	 	    		 clubName: keyword
+	 	    		 suggestcontent: keyword
 	 	    	  }
 	 	    	  ,page: {
 	 	    	    curr: 1 //重新从第 1 页开始
@@ -126,11 +118,10 @@
   	    ,add: function(){ //添加数据
   	    	//初始化弹出框数据
   	    	form.val("view", {
-   	    	 "view_id":null
+   	    	 "suggest_id":null
    	    	,"use_id": null
-   	    	,"club_id": null
-   	    	,"photo": null
-   	  		,"clubName":null
+   	    	,"suggestcontent": null
+   	    	,"suggesttime": null
    	    	});
   	    	layer.open({
 	          type: 1
@@ -147,16 +138,14 @@
 	            var btn = layero.find('.layui-layer-btn');
 	            	btn.find('.layui-layer-btn0').on('click', function(){
 			            	var use_id = $("#use_id").val();
-			            	var club_id = $("#club_id").val();
-			            	var photo = $("#photo").val();
-			            	var clubName = $("#clubName").val();
+			            	var suggestcontent = $("#suggestcontent").val();
+			            	var suggesttime = $("#suggesttime").val();
 			            	$.post(
-			            			"/xy/view/add",
+			            			"/xy//user/suggestAdd",
 			            	        {
 			            			 use_id: use_id,
-			            			 club_id: club_id,
-			            			 photo: photo,
-			            			 clubName: clubName
+			            			 suggestcontent: suggestcontent,
+			            			 suggesttime: suggesttime,
 			            				},
 			            	        function(result){
 			            	          table.reload('tabId',{})          
@@ -166,92 +155,8 @@
 	          }
 	        });
   	    }
-  		//修改
-  	    ,edit: function(){ //修改选中数据
-  	    	var checkStatus = table.checkStatus('tabId');
-    	      var data = checkStatus.data;
-    	      if(data.length==0){
-    	    	  layer.msg("不选择修改用户你让我如何编辑哟")
-    	      }else if(data.length>1){
-    	    	  layer.msg("请不要多选哟")
-    	      }else{
-    	    	  form.val("view", {
-    	    		  	"view_id":data[0].view_id
-    	    		  	,"use_id":data[0].use_id
-    	    		  	,"club_id":data[0].club_id
-    	    	    	,"photo": data[0].photo
-    	    	  		,"clubName":data[0].clubName
-    	    	    	});
-    	  	    	layer.open({
-    	  	          type: 1
-    	  	          ,title: "修改分享信息" //不显示标题栏
-    	  	          ,closeBtn: 2
-    	  	          ,area: ['30%', '80%']
-    	  	          ,shade: 0
-    	  	          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-    	  	          ,btn: ['保存', '取消']
-    	  	          ,btnAlign: 'c'//按钮居中
-    	  	          ,moveType: 0 //拖拽模式，0或者1
-    	  	          ,content: $('#editDialog')
-    	  	          ,success: function(layero){
-    	  	            var btn = layero.find('.layui-layer-btn');
-    	  	            btn.find('.layui-layer-btn0').on('click', function(){
-    	  	            	var view_id = $("#view_id").val();
-    	  	            	var use_id = $("#use_id").val();
-    	  	            	var club_id = $("#club_id").val();
-    	  	            	var photo = $("#photo").val();
-    	  	            	var clubName = $("#clubName").val();
-    	  	            	$.post(
-    	  	            			"/xy/view/edit",
-    	  	            	        {view_id: view_id,
-    	  	            			use_id: use_id,
-    	  	            			club_id: club_id,
-    	  	            			photo: photo,
-    	  	            			clubName: clubName
-    	  	            				},
-    	  	            	        function(result){
-    	  	            	          table.reload('tabId',{});          
-    	  	            	          layer.msg('保存修改成功');
-    	  	            	          $.post(
-    				            			"/xy/admin/add",
-    				            	        {
-    				            				account: layui.sessionData('userInfo').account,
-    				            			 	details: "修改了"+account+"社团照片",
-    				            				},
-    				            	        function(result){
-    				            	      });
-    	  	            	      });
-    	  	        	  });
-    	  	          }
-    	  	        });
-    	      }
-    	      
-  	    }
-  		//删除
-  	    ,del: function(){ //删除选中数据
-  	    	var checkStatus = table.checkStatus('tabId');
-    	    var data = checkStatus.data;
-    	    //判断用户选择了多少行
-    	    if(data.length==0){
-    	    	layer.msg("请选择删除哪一行哟");
-    	    }else{
-    	    	layer.confirm('是否删除？', {icon: 3, title:'提示'}, function(index){
-    	    		  //do something
-    	    		//多行删除
-        	    	for(var i=0;i<data.length;i++){
-    		    	    var view_id = data[i].view_id;
-    		    	    $.post(
-    		          			"/xy/view/delete",
-    		          	        {view_id:view_id},
-    		          	        function(result){
-    		          	          table.reload('tabId',{});          
-    		          	      });
-        	    	}
-		          	layer.msg("已删除"+data.length+"个用户");
-    	    		  layer.close(index);
-    	    		});
-    	    }
-  	    },
+  	  ,edit: function(){layer.msg('用户反馈不允许修改')}
+  	  ,del: function(){layer.msg('用户反馈不允许删除')}
   	  };
   	  
   	  $('#toolbar .layui-btn').on('click', function(){

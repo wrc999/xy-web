@@ -3,15 +3,23 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wrc.xy.dao.adminDao">
-	<!-- 添加 -->
+	<select id="adminGetByAccount" parameterType="String" resultType="adminAccount">
+		select * from admin where account=#{value}
+	</select>
+	<!-- 添加日志 -->
 	<insert id="adminLogAdd" parameterType="adminLog">
 		insert into adminlog(account,details,createTime) 
 		values(#{account},#{details},#{createTime})
 	</insert>
+	<!-- 添加管理员 -->
+	<insert id="adminAdd" parameterType="adminAccount">
+		insert into admin(account,passWord,createTime) 
+		values(#{account},#{passWord},#{createTime})
+	</insert>
 	<select id="adminLogSelect" resultType="adminLog">
 		select * from adminlog
 	</select>
-	<select id="login" parameterType="userinfo" resultType="String">
-		select account from admin where account=#{account} and passWord=#{passWord}
+	<select id="login" parameterType="adminAccount" resultType="adminAccount">
+		select account,power from admin where account=#{account} and passWord=#{passWord}
 	</select>
 </mapper>

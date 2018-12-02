@@ -17,4 +17,5 @@ public interface userService {
 		public ArrayList<userinfo> userAdminGet(userinfo user);//管理员获取所有用户
 		public void changePassWord(userinfo user);//管理员获取所有用户
 		public userinfo login(userinfo user);
+		public ArrayList<suggest> adminGetSuggest(suggest suggest);
 }

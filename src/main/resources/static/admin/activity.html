@@ -49,21 +49,21 @@
 		<thead>
 		    <tr>
 		      <th lay-data="{type:'checkbox'}"></th>
-		      <th lay-data="{field:'activity_id',width:80,sort:true}">ID</th>
-		      <th lay-data="{field:'account', width:80}">发起人</th>
-		      <th lay-data="{field:'name', width:80}">活动名</th>
-		      <th lay-data="{field:'starttime', width:80}">开始时间</th>
-		      <th lay-data="{field:'endtime', width: 100}">结束时间</th>
-		      <th lay-data="{field:'place', width: 100}">活动地点</th>
-		      <th lay-data="{field:'peopleNum', width: 100}">活动人数</th>
-		      <th lay-data="{field:'ava', width: 100}">活动海报</th>
-		      <th lay-data="{field:'intro', width: 100}">活动简介</th>
-		      <th lay-data="{field:'keyword', width: 100}">活动分类</th>
-		      <th lay-data="{field:'online', width: 100}">是否线上</th>
-		      <th lay-data="{field:'pic1', width: 100}">活动照片1</th>
-		      <th lay-data="{field:'pic2', width: 100}">活动照片2</th>
-		      <th lay-data="{field:'pic3', width: 100}">活动照片3</th>
-		      <th lay-data="{field:'activityPass', width: 100}">是否审核</th>
+		      <th lay-data="{field:'activity_id',sort:true}">ID</th>
+		      <th lay-data="{field:'account'}">发起人</th>
+		      <th lay-data="{field:'name'}">活动名</th>
+		      <th lay-data="{field:'starttime'}">开始时间</th>
+		      <th lay-data="{field:'endtime'}">结束时间</th>
+		      <th lay-data="{field:'place'}">活动地点</th>
+		      <th lay-data="{field:'peopleNum'}">活动人数</th>
+		      <th lay-data="{field:'ava'}">活动海报</th>
+		      <th lay-data="{field:'intro'}">活动简介</th>
+		      <th lay-data="{field:'keyword'}">活动分类</th>
+		      <th lay-data="{field:'online'}">是否线上</th>
+		      <th lay-data="{field:'pic1'}">活动照片1</th>
+		      <th lay-data="{field:'pic2'}">活动照片2</th>
+		      <th lay-data="{field:'pic3'}">活动照片3</th>
+		      <th lay-data="{field:'activityPass'}">是否审核</th>
 		    </tr>
 		  </thead>
 	</table>
@@ -85,13 +85,13 @@
 		<div class="layui-form-item">
 		    <label class="layui-form-label">开始时间：</label>
 		    <div class="layui-input-block">
-		      <input name="starttime" id="starttime" class="layui-input" style="width:60%">
+		      <input name="starttime" id="starttime" readonly class="layui-input date" style="width:60%">
 		    </div>
 		</div>
 		<div class="layui-form-item">
 		    <label class="layui-form-label">结束时间：</label>
 		    <div class="layui-input-block">
-		      <input name="endtime" id="endtime" class="layui-input" style="width:60%">
+		      <input name="endtime" id="endtime" readonly class="layui-input date" style="width:60%">
 		    </div>
 		</div>
 		<div class="layui-form-item">
@@ -172,6 +172,7 @@
 		      elem: this
 		      ,trigger: 'click'
 		      ,theme: 'molv'
+		      ,format: 'yyyy.MM.dd'
 		    });
 		  });
 		//初始数据表格（方法渲染）
