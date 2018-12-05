@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="wrc.xy.dao.clubDao">
 	<!-- 增加社团 -->
 	<insert id="clubAdd" parameterType="club" useGeneratedKeys="true" keyProperty="club_id">
-		insert into club(account,groupId,clubSchool,clubAva,clubName,clubIntro,sort,createTime,clubSchool,clubSlogan) 
-		values(#{account},#{groupId},#{clubSchool},#{clubAva},#{clubName},#{clubIntro},#{sort},#{createTime},#{clubSchool},#{clubSlogan})
+		insert into club(account,groupId,clubSchool,clubAva,clubName,clubIntro,sort,createTime,clubSlogan) 
+		values(#{account},#{groupId},#{clubSchool},#{clubAva},#{clubName},#{clubIntro},#{sort},#{createTime},#{clubSlogan})
 	</insert>
 	<!-- 社团信息修改 -->
 	<update id="clubEdit" parameterType="club">
