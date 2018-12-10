@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 查询分享 -->
 	<select id="talkSelect" parameterType="talk" resultType="talk">
 		select t.*,u.account,u.school,u.nickName,u.avaPath from talk t,userinfo u where t.use_id=u.use_id
-		<if test="use_id!=null and use_id!=''">
+		<if test="use_id!=0">
 			and t.use_id = #{use_id}
 		</if>
 		<if test="school!=null and school!=''">

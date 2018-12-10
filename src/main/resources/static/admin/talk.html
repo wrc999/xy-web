@@ -21,7 +21,7 @@
     <form class="layui-form">
         <div class="layui-inline">
             <div class="layui-input-inline">
-                <input type="text"  id="keyword" class="layui-input searchVal" placeholder="请输入搜索的账号名" />
+                <input type="text"  id="keyword" class="layui-input searchVal" placeholder="请输入搜索的用户ID" />
             </div>
             <a class="layui-btn search_btn" data-type="look">搜索</a>
         </div>
@@ -108,7 +108,7 @@
 	 	     table.reload('tabId', {
 	 	    	 url:'/xy/talk/adminGet'
 	 	    	  ,where: { //设定异步数据接口的额外参数，任意设
-	 	    		 use_id: keyword
+	 	    		 keyword: keyword
 	 	    	  }
 	 	    	  ,page: {
 	 	    	    curr: 1 //重新从第 1 页开始

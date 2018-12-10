@@ -76,6 +76,7 @@
 	    </div>
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item"><a href="javascript:;" class="user" data-type="index">首页</a></li>
         <li class="layui-nav-item layui-nav-itemed">
           <a class="" href="javascript:;">信息管理</a>
           <dl class="layui-nav-child">
@@ -102,11 +103,11 @@
   <div class="layui-body">
 		<div class="layui-tab layui-tab-brief" lay-filter="tab" lay-allowclose="true">
 			  <ul class="layui-tab-title">
-			    <li class="layui-this" lay-id="11">首页</li>
+			    <li class="layui-this" lay-id="index">首页</li>
 			  </ul>
 			  <div class="layui-tab-content">
 			    <div class="layui-tab-item layui-show">
-			    	<div>
+			    	<div id="index">
 						<div style="background:	rgb(28,176,154)" id="club" class="layui-btn" data-type="indexClub">
 							<img alt="" src="../images/index_club.png" id="club_img">
 							<div id="club_name"><p>总社团</p></div>
@@ -237,6 +238,15 @@
 				        	  });
 			          }
 			        });
+		    },
+		    index: function(){
+		    	if($(".layui-tab-title li[lay-id='index']").length==0){
+		    		location.reload();
+				}else{
+					//存在，跳转界面
+					element.tabChange('tab', 'index');
+					//刷新数据
+				}
 		    },
 		    user: function(){
 			if($(".layui-tab-title li[lay-id='user']").length==0){

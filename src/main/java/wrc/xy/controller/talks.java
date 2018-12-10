@@ -110,7 +110,8 @@ public class talks {
 	
 		//后台查询动态接口
 		@RequestMapping("/adminGet")
-		public  Map<String, Serializable> adminGet(talk talk,String limit,String page) throws Exception{
+		public  Map<String, Serializable> adminGet(talk talk,String limit,String page,String keyword) throws Exception{
+			if(keyword!="" & keyword!=null) {talk.setUse_id(Integer.valueOf(keyword));}
 			int pageSize = 10;
 			if(limit != null && !limit.equals("")){
 				pageSize = Integer.parseInt(limit);
