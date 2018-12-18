@@ -16,8 +16,8 @@ public interface activityService {
 	public void joinsAdd(activityjoins a);					//添加报名者
 	public void joinsDelete(activityjoins ajoins);
 	public List<userinfo> getActivityJoins(Integer activity_id);
-	public void praiseAdd(activitypraise a);					//添加报名者
-	public void praiseDelete(activitypraise praise);
+	public int praiseAdd(activitypraise a);					//添加报名者
+	public int praiseDelete(activitypraise praise);
 	public activity getByActivityId(Integer activity_id);
 	public List<activity> activitySearch(String name);
 	public List<activity> getOnLine(String account);

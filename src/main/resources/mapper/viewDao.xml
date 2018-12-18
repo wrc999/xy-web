@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="wrc.xy.dao.viewDao">
 	<!-- 添加 -->
 	<insert id="add" parameterType="view">
-		insert into view(use_id,photo,clubName,uploadTime) 
-		values(#{use_id},#{photo},#{clubName},#{uploadTime})
+		insert into view(use_id,photo,club_id,clubName,uploadTime) 
+		values(#{use_id},#{photo},#{club_id},#{clubName},#{uploadTime})
 	</insert>
 	<!-- 删除 -->
 	<delete id="delete" parameterType="view">

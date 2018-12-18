@@ -139,15 +139,17 @@ public class activityServiceImpl implements activityService {
 	}
 
 	@Override
-	public void praiseAdd(activitypraise a) {
+	public int praiseAdd(activitypraise a) {
 		// TODO Auto-generated method stub
 		ad.praiseAdd(a);
+		return ad.praiseGet(a.getActivity_id()).size();
 	}
 
 	@Override
-	public void praiseDelete(activitypraise praise) {
+	public int praiseDelete(activitypraise praise) {
 		// TODO Auto-generated method stub
 		ad.praiseDelete(praise);
+		return ad.praiseGet(praise.getActivity_id()).size();
 	}
 
 	@Override

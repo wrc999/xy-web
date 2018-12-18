@@ -40,15 +40,13 @@ public class activitys {
 	}
 	//活动点赞
 	@RequestMapping("praiseAdd")
-	public  String praiseAdd(activitypraise praise) {
-		as.praiseAdd(praise);
-		return "1";
+	public  int praiseAdd(activitypraise praise) {
+		return as.praiseAdd(praise);
 	}
 	//活动取消报名
 	@RequestMapping("praiseDelete")
-	public  String praiseDelete(activitypraise praise) {
-		as.praiseDelete(praise);
-		return "1";
+	public  int praiseDelete(activitypraise praise) {
+		return as.praiseDelete(praise);
 	}
 	//添加活动
 	@RequestMapping("add")

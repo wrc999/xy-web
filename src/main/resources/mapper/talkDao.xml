@@ -5,8 +5,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="wrc.xy.dao.talkDao">
 	<!-- 增加分享 -->
 	<insert id="talkAdd" parameterType="talk">
-		insert into talk(use_id,talktime,talkcontent,talkphoto,topicName) 
-		values(#{use_id},#{talktime},#{talkcontent},#{talkphoto},#{topicName})
+		insert into talk
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="use_id != null">
+			    	use_id,
+			    </if>
+				<if test="talktime != null">
+			    	talktime,
+			    </if>
+				<if test="talkcontent != null">
+			    	talkcontent,
+			    </if>
+				<if test="talkphoto != null">
+			    	talkphoto,
+			    </if>
+				<if test="topicName != ''">
+			    	topicName,
+			    </if>
+			</trim>
+			<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="use_id != null">
+			    	#{use_id},
+			    </if>
+				<if test="talktime != null">
+			    	#{talktime},
+			    </if>
+				<if test="talkcontent != null">
+			    	#{talkcontent},
+			    </if>
+				<if test="talkphoto != null">
+			    	#{talkphoto},
+			    </if>
+				<if test="topicName != ''">
+			    	#{topicName},
+			    </if>
+			</trim>
 	</insert>
 	<!-- 删除分享 -->
 	<delete id="talkDelete" parameterType="talk">

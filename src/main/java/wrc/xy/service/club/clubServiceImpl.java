@@ -53,6 +53,10 @@ public class clubServiceImpl implements clubService{
 	@Override
 	public void clubJoin(clubmember member) {
 		// TODO Auto-generated method stub
+		club tempClub = new club();
+		tempClub.setClub_id(member.getClub_id());
+		club club = cd.findById(tempClub);
+		member.setGroupId(club.getGroupId());
 		cd.clubJoin(member);
 	}
 

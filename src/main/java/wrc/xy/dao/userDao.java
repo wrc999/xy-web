@@ -13,7 +13,6 @@ public interface userDao {
 	public void userAdd(userinfo user) throws SQLException;//添加
 	public void userDelete(userinfo user) throws SQLException;//删除
 	public void userUpdate(userinfo user) throws SQLException;//修改
-	public void userPassWord_edit(userinfo user) throws SQLException;//修改密码
 	public void userSuggestAdd(suggest suggest) throws SQLException;//意见反馈
 	public ArrayList<userinfo> userAdminGet(userinfo user);
 	public void changePassWord(userinfo user);

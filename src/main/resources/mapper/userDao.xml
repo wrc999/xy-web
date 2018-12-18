@@ -61,14 +61,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="nickName!=null ">
 				nickName=#{nickName},
 			</if>
-			<choose>
+			<if test="birth!=null and birth!=''">
+				birth=#{birth},
+			</if>
+			<!-- <choose>
                 <when test="birth!=null and birth!=''">
                     birth=#{birth},
                 </when>
                 <otherwise>
                     birth=null,
                 </otherwise>
-            </choose>
+            </choose> -->
 			<if test="sex!=null  ">
 				sex=#{sex},
 			</if>
@@ -81,14 +84,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="major!=null">
 				major=#{major},
 			</if>
-			<choose>
+			<if test="entryYear!=null and entryYear!=''">
+				entryYear=#{entryYear},
+			</if>
+			<!-- <choose>
                 <when test="entryYear!=null and entryYear!=''">
                     entryYear=#{entryYear},
                 </when>
                 <otherwise>
                     entryYear=null,
                 </otherwise>
-            </choose>
+            </choose> -->
 			<if test="perSign!=null  ">
 				perSign=#{perSign},
 			</if>

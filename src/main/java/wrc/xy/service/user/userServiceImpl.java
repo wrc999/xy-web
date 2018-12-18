@@ -49,12 +49,6 @@ public class userServiceImpl implements userService{
 	}
 
 	@Override
-	public void UserPassWord_edit(userinfo user) throws SQLException {
-		// TODO Auto-generated method stub
-		ud.userPassWord_edit(user);
-	}
-
-	@Override
 	public void userSuggestAdd(suggest suggest) throws SQLException {
 		// TODO Auto-generated method stub
 		ud.userSuggestAdd(suggest);

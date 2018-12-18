@@ -48,8 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<!-- 加入社团 -->
 	<insert id="clubJoin" parameterType="clubmember">
-		insert into clubmember(member_id,account,club_id,joinTime) 
-		values(#{member_id},#{account},#{club_id},#{joinTime})
+		insert into clubmember(member_id,account,club_id,joinTime,groupId) 
+		values(#{member_id},#{account},#{club_id},#{joinTime},#{groupId})
 	</insert>
 	<!-- 删除社团 -->
 	<delete id="clubDelete" parameterType="club">
