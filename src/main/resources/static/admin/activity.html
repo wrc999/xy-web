@@ -267,7 +267,7 @@
 			            	          $.post(
 						            			"/xy/admin/add",
 						            	        {
-						            				account: layui.sessionData('userInfo').account,
+						            				account: layui.sessionData('userInfo').account.account,
 						            			 	details: "添加了活动"+name,
 						            				},
 						            	        function(result){
@@ -358,7 +358,7 @@
     	  	            	        $.post(
 					            			"/xy/admin/add",
 					            	        {
-					            				account: layui.sessionData('userInfo').account,
+					            				account: layui.sessionData('userInfo').account.account,
 					            			 	details: "修改了活动"+name,
 					            				},
 					            	        function(result){
@@ -393,7 +393,7 @@
 	    		          	      $.post(
 					            			"/xy/admin/add",
 					            	        {
-					            				account: layui.sessionData('userInfo').account,
+					            				account: layui.sessionData('userInfo').account.account,
 					            			 	details: "删除了活动"+name,
 					            				},
 					            	        function(result){

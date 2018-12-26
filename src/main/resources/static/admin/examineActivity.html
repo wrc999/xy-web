@@ -15,7 +15,8 @@
 	}
 </style>
 <script type="text/html" id="barDemo">
-<a class="layui-btn layui-btn-norma layui-btn-xs" lay-event="examine">审核</a>
+<a class="layui-btn layui-btn-norma layui-btn-xs" lay-event="success">通过</a>
+<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="fail">拒绝</a>
 </script>
 </head>
 <body>
@@ -52,7 +53,6 @@
 		<thead>
 		    <tr>
 		      <th lay-data="{type:'checkbox'}"></th>
-		      <th lay-data="{fixed: 'right', toolbar: '#barDemo'}">操作</th>
 		      <th lay-data="{field:'activity_id',sort:true}">ID</th>
 		      <th lay-data="{field:'account'}">发起人</th>
 		      <th lay-data="{field:'name'}">活动名</th>
@@ -67,6 +67,7 @@
 		      <th lay-data="{field:'pic2'}">活动照片2</th>
 		      <th lay-data="{field:'pic3'}">活动照片3</th>
 		      <th lay-data="{field:'activityPass'}">是否审核</th>
+		      <th lay-data="{fixed: 'right',width:178, align:'center', toolbar: '#barDemo'}">审核</th>
 		    </tr>
 		  </thead>
 	</table>
@@ -179,10 +180,11 @@
   	  table.on('tool(demo)', function(obj){
   	    var data = obj.data;
   	    //console.log(obj)
-  	    if(obj.event === 'examine'){
+  	    if(obj.event === 'success'){
   	      layer.confirm('真的没有错误了吗', function(index){
   	    	  var activity_id = data.activity_id;
   	    	  var name = data.name;
+  	    	  var account = layui.sessionData('userInfo').account.account;
   	    	$.post(
         			"/xy/activity/edit",
         	        {
@@ -195,7 +197,31 @@
         	          $.post(
         	        			"/xy/admin/add",
         	        	        {
-        	        				account: layui.sessionData('userInfo').account,
+        	        				account: account,
+        	        			 	details: "审核了活动"+name
+        	        				},
+        	        	        function(result){
+        	        	      });
+        	      });
+  	      });
+  	    }
+  	    if(obj.event === 'fail'){
+  	      layer.confirm('是否拒绝活动申请', function(index){
+  	    	  var activity_id = data.activity_id;
+  	    	  var name = data.name;
+  	    	$.post(
+        			"/xy/activity/edit",
+        	        {
+        				activity_id: activity_id,
+        			 	activityPass: 2
+        				},
+        	        function(result){
+        	          table.reload('tabId',{});     
+        	          layer.msg('成功拒绝该申请');
+        	          $.post(
+        	        			"/xy/admin/add",
+        	        	        {
+        	        				account: layui.sessionData('userInfo').account.account,
         	        			 	details: "审核了活动"+name,
         	        				},
         	        	        function(result){
@@ -203,6 +229,7 @@
         	      });
   	      });
   	    }
+  	    
   	  });
   		
   		$('#toolbar .layui-btn').on('click', function(){
@@ -216,7 +243,7 @@
 	 	     table.reload('tabId', {
 	 	    	 url:'/xy/activity/adminGetExamine'
 	 	    	  ,where: { //设定异步数据接口的额外参数，任意设
-	 	    		 account: search
+	 	    		 name: search
 	 	    	  }
 	 	    	  ,page: {
 	 	    	    curr: 1 //重新从第 1 页开始

@@ -88,20 +88,10 @@ public class admin {
 		int allClub,allActivity,allUser,examineClub = 0,examineActivity = 0;
 		ArrayList<activity> activityList = (ArrayList<activity>) as.getByAccount(null);
 		allActivity = activityList.size();
-		for(activity a:activityList) {
-			//待审核
-			if(a.getActivityPass()==0) {
-				examineActivity++;
-			}
-		}
+		examineActivity = as.getExamine(null).size();
 		ArrayList<club> clubList = cs.clubGet(null);
+		examineClub = cs.adminGetExamine(null).size();
 		allClub = clubList.size();
-		for(club a:clubList) {
-			//待审核
-			if(a.getClubPass()==0) {
-				examineClub++;
-			}
-		}
 		ArrayList<userinfo> userList = us.userAdminGet(null);
 		allUser = userList.size();
 		ArrayList<adminLog> adminLogs = ads.adminLogSelect();

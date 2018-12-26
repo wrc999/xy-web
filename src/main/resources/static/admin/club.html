@@ -207,7 +207,7 @@
 			            	          $.post(
 						            			"/xy/admin/add",
 						            	        {
-						            				account: layui.sessionData('userInfo').account,
+						            				account: layui.sessionData('userInfo').account.account,
 						            			 	details: "创建了社团"+clubName,
 						            				},
 						            	        function(result){
@@ -281,7 +281,7 @@
     	  	            	          $.post(
 					            			"/xy/admin/add",
 					            	        {
-					            				account: layui.sessionData('userInfo').account,
+					            				account: layui.sessionData('userInfo').account.account,
 					            			 	details: "修改了社团"+clubName,
 					            				},
 					            	        function(result){
@@ -315,7 +315,7 @@
     		          	          $.post(
 				            			"/xy/admin/add",
 				            	        {
-				            				account: layui.sessionData('userInfo').account,
+				            				account: layui.sessionData('userInfo').account.account,
 				            			 	details: "删除了社团"+clubName,
 				            				},
 				            	        function(result){

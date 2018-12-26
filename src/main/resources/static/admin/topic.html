@@ -163,7 +163,7 @@
 			            	          $.post(
 						            			"/xy/admin/add",
 						            	        {
-						            				account: layui.sessionData('userInfo').account,
+						            				account: layui.sessionData('userInfo').account.account,
 						            			 	details: "发布了话题"+topicName,
 						            				},
 						            	        function(result){
@@ -222,7 +222,7 @@
     	  	            	          $.post(
     				            			"/xy/admin/add",
     				            	        {
-    				            				account: layui.sessionData('userInfo').account,
+    				            				account: layui.sessionData('userInfo').account.account,
     				            			 	details: "修改了话题"+topicName,
     				            				},
     				            	        function(result){
@@ -256,7 +256,7 @@
     		          	          $.post(
 				            			"/xy/admin/add",
 				            	        {
-				            				account: layui.sessionData('userInfo').account,
+				            				account: layui.sessionData('userInfo').account.account,
 				            			 	details: "删除了话题"+topicName,
 				            				},
 				            	        function(result){

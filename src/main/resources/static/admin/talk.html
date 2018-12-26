@@ -155,7 +155,7 @@
 			            	          $.post(
 						            			"/xy/admin/add",
 						            	        {
-						            				account: layui.sessionData('userInfo').account,
+						            				account: layui.sessionData('userInfo').account.account,
 						            			 	details: "发布了动态内容为"+talkcontent+"的动态",
 						            				},
 						            	        function(result){
@@ -211,7 +211,7 @@
     	  	            	        $.post(
 					            			"/xy/admin/add",
 					            	        {
-					            				account: layui.sessionData('userInfo').account,
+					            				account: layui.sessionData('userInfo').account.account,
 					            			 	details: "修改了动态内容为"+talkcontent+"的动态",
 					            				},
 					            	        function(result){
@@ -245,7 +245,7 @@
     		          	          $.post(
 				            			"/xy/admin/add",
 				            	        {
-				            				account: layui.sessionData('userInfo').account,
+				            				account: layui.sessionData('userInfo').account.account,
 				            			 	details: "删除了动态内容为"+talkcontent+"的动态",
 				            				},
 				            	        function(result){

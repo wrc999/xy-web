@@ -235,4 +235,16 @@ public class activityServiceImpl implements activityService {
 		// TODO Auto-generated method stub
 		ad.edit(activity);
 	}
+
+	@Override
+	public ArrayList<activity> getAdminExamine(String name) {
+		// TODO Auto-generated method stub
+		ArrayList<activity> activities = ad.getAdminExamine(name);
+		ArrayList<String> temp = new ArrayList<String>();
+		for(activity a:activities) {
+			a.setaAccount(temp);
+			a.setjAccount(temp);
+		}
+		return activities;
+	}
 }

@@ -142,7 +142,7 @@ public class activitys {
 	}
 	//后台查询所有活动
 	@RequestMapping("adminGetExamine")
-	public  Map<String, Serializable> adminGetExamine(String account,String limit,String page){
+	public  Map<String, Serializable> adminGetExamine(String name,String limit,String page){
 		int pageSize = 10;
 		if(limit != null && !limit.equals("")){
 			pageSize = Integer.parseInt(limit);
@@ -151,7 +151,7 @@ public class activitys {
 		if(page != null && !page.equals("")){
 			page1 = Integer.parseInt(page);
 		}
-		ArrayList<activity> activityList = (ArrayList<activity>) as.getExamine(null);
+		ArrayList<activity> activityList = (ArrayList<activity>) as.getAdminExamine(name);
 		int total = activityList.size();
 		ArrayList<activity> activityList1 = new ArrayList<activity>();
 		Map<String, Serializable> resultMap = new HashMap<String, Serializable>();

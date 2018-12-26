@@ -79,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="adminGetExamine" parameterType="club" resultType="club">
 		select * from club where clubPass=0
 		<if test="clubName!=null and clubName!=''">
-			and clubName = #{clubName}
+			and clubName like "%${clubName}%"
 		</if>
 	</select>
 	<!-- 查询所有社团 -->

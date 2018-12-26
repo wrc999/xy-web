@@ -222,7 +222,7 @@
 			            	btn.find('.layui-layer-btn0').on('click', function(){
 					            	var account = $("#account").val();
 					            	var passWord = $("#passWord").val();
-					            	var applyAccount = layui.sessionData('userInfo').account;
+					            	var applyAccount = layui.sessionData('userInfo').account.account;
 					            	$.post(
 					            			"/xy/admin/adminAdd",
 					            	        {

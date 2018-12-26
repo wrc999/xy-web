@@ -215,7 +215,7 @@
     	  	            	          $.post(
     				            			"/xy/admin/add",
     				            	        {
-    				            				account: layui.sessionData('userInfo').account,
+    				            				account: layui.sessionData('userInfo').account.account,
     				            			 	details: "修改了"+account+"社团照片",
     				            				},
     				            	        function(result){

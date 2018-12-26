@@ -73,6 +73,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 and onLine=#{online}
 			</if>
 	</select>
+	<select id="getAdminExamine" parameterType="String" resultType="activity">
+		select * from activity where activityPass=0
+			<if test="_parameter!=null">
+				 and name like "%${value}%"
+			</if>
+	</select>
 	<select id="getFalseExamine" parameterType="Integer" resultType="activity">
 		select * from activity where activityPass=2
 			<if test="_parameter!=null">

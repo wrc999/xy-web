@@ -1,5 +1,6 @@
 package wrc.xy.service.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import wrc.xy.entity.activity;
@@ -25,4 +26,5 @@ public interface activityService {
 	public List<activity> getExamine(Integer online);
 	public List<activity> getFalseExamine(Integer online);
 	public void edit(activity activity);
+	public ArrayList<activity> getAdminExamine(String name);
 }

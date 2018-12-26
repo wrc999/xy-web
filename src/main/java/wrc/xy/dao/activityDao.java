@@ -1,5 +1,6 @@
 package wrc.xy.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import wrc.xy.entity.activity;
@@ -24,4 +25,5 @@ public interface activityDao {
 		public List<activity> getExamine(Integer online);//获取待审核
 		public List<activity> getFalseExamine(Integer online);//获取未审核
 		public void edit(activity activity);
+		public ArrayList<activity> getAdminExamine(String account);
 }
